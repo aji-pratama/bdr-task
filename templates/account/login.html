@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" media="screen" title="no title">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static '/css/login.css' %}" media="screen" title="no title">
+</head>
+<body>
+  <div class="login-page">
+    <div class="form">
+      <div class="login-title">LOGIN<hr></div>
+      <form class="login-form" action="{% url 'login' %}" method="POST" role="form"> {% csrf_token %}
+        {% if messages %}
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password" name="password" placeholder="password"/>
+        <input class="button" type="submit" name="submit" value="Login">
+      </form>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="{% static '/js/jquery-3.1.1.js' %}"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{% static '/js/bootstrap.js' %}"></script>
+
+  <script type="text/javascript">
+    $('.message a').click(function(){
+      $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+  </script>
+</body>
+</html>
