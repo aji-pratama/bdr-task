@@ -1,0 +1,72 @@
+{% extends "base/base_pkt.html" %}
+{% block content_pkt %}
+
+	<div id="app">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Perhitungan Kualifikasi Tender PT. BDR Indonesia</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+<!-- Content -->
+		<div class="container">
+			<div class="row">
+				<table class="table table-bordered">
+
+					<tr>
+						<th style="background-color:#c47ed2; color: #fff;" colspan="2">A. Administrasi</th>
+						<th style="background-color:#000; color: #fff;">Dibutuhkan?</th>
+						<th style="background-color:#000; color: #fff;">Bisa Dilengkapi</th>
+					</tr>
+
+					<tr>
+						<td style="text-align: center; background-color: #f4b8b8;"><b>STANDARD DOCS</b></td>
+					</tr>
+<!-- Form Hidden-->
+					<form class="form-hidden" action="{% url 'pkt:standard_docs' %}" method="post">{% csrf_token %}
+<!-- Form Hidden-->
+          {% for pkt in pkt_data %}
+
+					<input type="hidden" name="data{{ pkt.id }}" value="{{ pkt.koef }}">
+
+					<tr>
+						<td>{{ pkt.teks }}</td>
+						<td>{{ pkt.koef }}%</td>
+						<td>
+							{% if pkt.id == 1 %}
+							<select class="a" name="">
+								<option value="no">No</option>
+								<option value="yes">Yes</option>
+							</select>
+							{% endif %}
+						</td>
+						<td>
+							{% if pkt.id == 1 %}
+							<select class="b" name="" disabled="true">
+								<option value="no">No</option>
+								<option value="yes">Yes</option>
+							</select>
+							{% endif %}
+						</td>
+					</tr>
+          {% endfor %}
+
+				</table>
+					<input class="btn btn-default btn-lg" id="able" type="submit" name="save" value=">" disabled>
+				</form>
+
+			</div>
+		</div>
+<!-- /Content -->
+	</div>
+
+{% endblock %}

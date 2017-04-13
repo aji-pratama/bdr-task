@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.account',
     'app.karyawan',
+    'app.pkt',
 ]
 
 MIDDLEWARE = [

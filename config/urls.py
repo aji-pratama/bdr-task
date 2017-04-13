@@ -9,4 +9,7 @@ urlpatterns = [
     url(r'^logout', account_views.logout, name='logout'),
     url(r'^dashboard', account_views.dashboard, name='dashboard'),
 
+    #asr
+    url(r'^pkt/', include('app.pkt.pkt_urls')),
+
 ]

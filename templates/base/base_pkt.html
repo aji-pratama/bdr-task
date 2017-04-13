@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BDR</title>
+	<link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" media="screen" title="no title">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static '/css/style-pkt.css' %}" media="screen" title="no title">
+	<style>
+		body{
+			background-color: #eee
+		}
+
+		.row{
+			margin: 30px 0px 30px 0px;
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+		}
+
+		.container{
+			width: 100%;
+		}
+
+	</style>
+</head>
+<body>
+
+  {% block content_pkt %}
+  {% endblock %}
+
+
+	<script src="{% static '/js/jquery-3.1.1.js' %}"></script>
+	<script>
+		$( document ).ready(function() {
+			$('.a').on('change', function() {
+				// alert(this.value);
+				$('.b').removeAttr("disabled");
+			});
+
+			$('.b').on('change', function() {
+				// alert(this.value);
+				$('#able').removeAttr("disabled");
+			});
+
+		});
+	</script>
+	<script src="{% static '/js/vue.js' %}"></script>
+	<!--<script	src="{% static '/js/vpkt.js' %}"></script>-->
+</body>
+</html>
