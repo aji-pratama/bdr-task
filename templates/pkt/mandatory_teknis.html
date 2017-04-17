@@ -23,38 +23,51 @@
 				<table class="table table-bordered">
 
 					<tr>
-						<th style="background-color:#c47ed2; color: #fff;" colspan="2">A. Administrasi</th>
+						<th style="background-color:#000; color: #fff;" colspan="2">MANDATORY TEKNIS</th>
 						<th style="background-color:#000; color: #fff;">Dibutuhkan?</th>
 						<th style="background-color:#000; color: #fff;">Bisa Dilengkapi</th>
-						<th> </th>
 					</tr>
 
-					<tr>
-						<td style="text-align: center; background-color: #f4b8b8;"><b>MANDATORY TEKNIS</b></td>
-					</tr>
 
+				<form class="form-hidden" action="{% url 'pkt:mandatory_teknis' %}" method="post">{% csrf_token %}
           {% for pkt in pkt_data %}
 					<tr>
 						<td>{{ pkt.teks }}</td>
 						<td>{{ pkt.koef }}%</td>
-						<td>
-							<select class="" name="">
-								<option value="yes">Yes</option>
-								<option value="no">No</option>
+							{% if pkt.id == 18 %}
+								<td>High Risk?</td>
+							{% elif pkt.id == 19 %}
+								<td>3 Bulan <</td>
+							{% elif pkt.id == 20 %}
+							<td colspan="2">
+							<select class="" name="data{{ pkt.id }}">
+								<option value="3">Internal</option>
+								<option value="0">Outsource</option>
 							</select>
-						</td>
-						<td>
-							<select class="" name="">
-								<option value="yes">Yes</option>
-								<option value="no">No</option>
+							</td>
+							{%  endif %}
+							{% if pkt.id == 18 %}
+							<td>
+							<select class="" name="data{{ pkt.id }}">
+								<option value="5">No</option>
+								<option value="0">Yes</option>
 							</select>
+							</td>
+							{% elif pkt.id == 19 %}
+							<td>
+							<select class="" name="data{{ pkt.id }}">
+								<option value="2">No</option>
+								<option value="0">Yes</option>
+							</select>
+							</td>
+							{%  endif %}
 						</td>
-						<td>{{ pkt.koef }}%</td>
 					</tr>
           {% endfor %}
 
 				</table>
 				<input class="btn btn-default btn-lg" type="submit" name="save" value=">">
+			</form>
 			</div>
 		</div>
 <!-- /Content -->

@@ -1,12 +1,49 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Tester</title>
-  </head>
-  <body>
-    {% for i in datas %}
-      {{ i.data1 }}
-    {% endfor %}
-  </body>
-</html>
+{% extends "base/base_pkt.html" %}
+{% block content_pkt %}
+
+	<div id="app">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Perhitungan Kualifikasi Tender PT. BDR Indonesia</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+    <div class="container">
+			<div class="row">
+
+        <table class="table table-hover">
+          <tr><td>Surat penawaran administrasi, teknis dan harga bermaterai, bertanggal, berstempel </td><td> {{ datas.data1 }}</td></tr>
+          <tr><td>Surat penawaran mencantumkan mencantumkan masa berlaku penawaran tanpa mencantumkan harga penawaran </td><td> {{ datas.data2 }}</td></tr>
+          <tr><td>Surat pernyataan jaminan mutu dan garansi </td><td> {{ datas.data3 }}</td></tr>
+          <tr><td>Melampirkan TDP, SITU, SIUP untuk pekerjaan jasa </td><td> {{ datas.data4 }}</td></tr>
+          <tr><td>Melampirkan SPT 2016, SSP 3 Bulan Terakhir </td><td> {{ datas.data5 }}</td></tr>
+          <tr><td>Surat pernyataan minat mengikuti pengadaan </td><td> {{ datas.data6 }}</td></tr>
+          <tr><td>Surat Pernyataan Tidak Pailit </td><td> {{ datas.data7 }}</td></tr>
+          <tr><td>Tidak masuk daftar hitam </td><td> {{ datas.data8 }}</td></tr>
+          <tr><td>Surat Pernyataan tidak dalam pengawasan pengadilan, tidak bangkrut, kegiatan usahanya tidak sedang dihentikan dan tidak sedang menjalani sanksi pidana </td><td> {{ datas.data9 }}</td></tr>
+          <tr><td>Pakta Integritas </td><td> {{ datas.data10 }}</td></tr>
+          <tr><td>Melampirkan pengalaman perusahaan, kemampuan teknis pada pekjerjaan sejenis </td><td> {{ datas.data11 }}</td></tr>
+          <tr><td>Surat dukungan dari MITRA </td><td> {{ datas.data12 }}</td></tr>
+          <tr><td>Sertifikat tertentu </td><td> {{ datas.data13 }}</td></tr>
+          <tr><td>SDM tersertifikat </td><td> {{ datas.data14 }}</td></tr>
+          <tr><td>Jaminan Penawaran </td><td> {{ datas.data15 }}</td></tr>
+          <tr><td>Risk level </td><td> {{ datas.data16 }}</td></tr>
+          <tr><td>Profit level </td><td> {{ datas.data17 }}</td></tr>
+          <tr><td>Scope pekerjaan </td><td> {{ datas.data18 }}</td></tr>
+          <tr><td>Lama pengerjaan </td><td> {{ datas.data19 }}</td></tr>
+          <tr><td>Outsource / internal team </td><td> {{ datas.data20 }}</td></tr>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock %}

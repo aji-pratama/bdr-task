@@ -1,9 +1,8 @@
 from django.shortcuts import render, render_to_response
-from .models import Pkt
+from .models import Pkt, Datas
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
-data_global = []
 def standard_docs(request):
     if request.POST:
         data1 = str(request.POST.get('data1'))
@@ -17,16 +16,25 @@ def standard_docs(request):
         data9 = str(request.POST.get('data9'))
         data10 = str(request.POST.get('data10'))
 
-        insert_data = {'data1':data1, 'data2':data2,
-                       'data3':data3, 'data4':data4,
-                       'data5':data5, 'data6':data6,
-                       'data7':data7, 'data8':data8,
-                       'data9':data9, 'data10':data10, }
+        try:
+            datas = Datas.objects.get(id=1)
+        except Exception:
+            datas = Datas(id=1, data1=1)
+            datas.save()
 
-        datas = [i for i in data_global]
+        datas = Datas.objects.get(id=1)
+        datas.data1=data1
+        datas.data2=data2
+        datas.data3=data3
+        datas.data4=data4
+        datas.data5=data5
+        datas.data6=data6
+        datas.data7=data7
+        datas.data8=data8
+        datas.data9=data9
+        datas.data10=data10
 
-        datas.append(insert_data)
-        data_global.append(insert_data)
+        datas.save()
         return HttpResponseRedirect('mandatory')
 
     pkt_data = Pkt.objects.filter(kode='standard')
@@ -38,13 +46,16 @@ def mandatory(request):
         data12 = str(request.POST.get('data12'))
         data13 = str(request.POST.get('data13'))
         data14 = str(request.POST.get('data14'))
-        insert_data = {'data11':data11, 'data12':data12,
-                       'data13':data13, 'data14':data14, }
 
-        datas = [i for i in data_global]
+        datas = Datas.objects.get(id=1)
 
-        datas.append(insert_data)
-        data_global.append(insert_data)
+        datas.data11=data11
+        datas.data12=data12
+        datas.data13=data13
+        datas.data14=data14
+
+        datas.save()
+
         return HttpResponseRedirect('financial')
 
     pkt_data = Pkt.objects.filter(kode='mandatory')
@@ -55,22 +66,38 @@ def financial(request):
         data15 = str(request.POST.get('data15'))
         data16 = str(request.POST.get('data16'))
         data17 = str(request.POST.get('data17'))
-        insert_data = {'data15':data15, 'data16':data16,
-                       'data17':data17,}
 
-        datas = [i for i in data_global]
+        datas = Datas.objects.get(id=1)
 
-        datas.append(insert_data)
-        data_global.append(insert_data)
+        datas.data15=data15
+        datas.data16=data16
+        datas.data17=data17
+
+        datas.save()
         return HttpResponseRedirect('mandatory-teknis')
 
     pkt_data = Pkt.objects.filter(kode='finance')
     return render(request, 'pkt/financial.html', {'pkt_data': pkt_data})
 
 def mandatory_teknis(request):
+    if request.POST:
+        data18 = str(request.POST.get('data18'))
+        data19 = str(request.POST.get('data19'))
+        data20 = str(request.POST.get('data20'))
+
+        datas = Datas.objects.get(id=1)
+
+        datas.data18=data18
+        datas.data19=data19
+        datas.data20=data20
+
+        datas.save()
+
+        return HttpResponseRedirect('summary')
+
     pkt_data = Pkt.objects.filter(kode='mandatory_tek')
     return render(request, 'pkt/mandatory_teknis.html', {'pkt_data': pkt_data})
 
 def summary(request):
-    datas = [i for i in data_global]
-    return render(request, 'pkt/summary.html', {'data_global': data_global, 'datas': datas})
+    datas = Datas.objects.get(id=1)
+    return render(request, 'pkt/summary.html', {'datas': datas})
