@@ -4,6 +4,11 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
 def standard_docs(request):
+    try:
+        datas = Datas.objects.get(id=1)
+    except Exception:
+        datas = Datas(id=1, data1=1)
+        datas.save()
     if request.POST:
         data1 = str(request.POST.get('data1'))
         data2 = str(request.POST.get('data2'))
@@ -15,12 +20,6 @@ def standard_docs(request):
         data8 = str(request.POST.get('data8'))
         data9 = str(request.POST.get('data9'))
         data10 = str(request.POST.get('data10'))
-
-        try:
-            datas = Datas.objects.get(id=1)
-        except Exception:
-            datas = Datas(id=1, data1=1)
-            datas.save()
 
         datas = Datas.objects.get(id=1)
         datas.data1=data1

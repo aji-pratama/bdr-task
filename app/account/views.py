@@ -1,55 +1,43 @@
-from __future__ import unicode_literals
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib.auth import authenticate, logout, login
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
-
-from app.karyawan.models import Akun, Karyawan
-
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.views import generic
+from django.views.generic import View
+from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse_lazy
+from .forms import LoginForm
 
 def index(request):
     return render(request, 'index.html')
 
-@login_required(login_url=settings.LOGIN_URL)
-def dashboard(request):
-    return render(request, 'account/dashboard.html')
+def  dashboard(request):
+    if request.user.is_authenticated and request.user.is_atasan:
+        return render(request, 'atasan/index_atasan.html')
 
-def login(request):
-	# if request.POST:
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated and not request.user.is_atasan:
+        return render(request, 'staff/index_staff.html')
+
+    return HttpResponseRedirect('/login')
+
+class LoginView(generic.FormView):
+    form_class = LoginForm
+    success_url = reverse_lazy('dashboard')
+    template_name = 'account/login.html'
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
         user = authenticate(username=username, password=password)
-        # username = request.POST.get('username')
-        # password = request.POST.get('password')
-		# user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-				try:
-					# akun = Akun.objects.get(akun=user.id)
-					login(request, user)
-#BUG: didieu
-					request.session['karyawan_id'] = akun.karyawan.id
-					request.session['jenis_akun'] = akun.jenis_akun
-					request.session['username'] = request.POST['username']
-				except:
-					messages.add_message(request, messages.INFO, 'Akun ini belum terhubung dengan data karyawan, silahkan hubungi administrator')
-				return redirect('/dashboard')
-            else:
-				messages.add_message(request, messages.INFO, 'User belum terverifikasi')
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            return super(LoginView, self).form_valid(form)
         else:
-			messages.add_message(request, messages.INFO, 'Username atau password Anda salah')
+            return self.form_invalid(form)
 
-    return render(request, 'account/login.html')
+class LogOutView(generic.RedirectView):
+    url = reverse_lazy('index')
 
-def logout(request):
-	logout(request)
-	return redirect('/')
-
-#DOING: Login
-# def login(request):
-#     if request.POST:
-#         return HttpResponse("yesss this is login")
-#     return render(request, 'account/login.html')
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return super(LogOutView, self).get(request, *args, **kwargs)

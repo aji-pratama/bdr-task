@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Shop Item - Start Bootstrap Template</title>
+    <title>BDR Task For Staff</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" media="screen" title="no title">
@@ -46,8 +46,10 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Nama Akun</a></li>
-                    <li><a href="#">Log Out</a></li>
+                  {% if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard' %}">{{ user.email }}</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                  {% endif %}
                 </ul>
 
             </div>
@@ -62,18 +64,18 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p class="lead">Side Menu</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+                    <a href="#" class="list-group-item active">Input Task Plan</a>
+                    <a href="#" class="list-group-item">Task Approved</a>
+                    <a href="#" class="list-group-item">Today Doing Task</a>
                 </div>
             </div>
 
             <div class="col-md-9">
                 <div class="thumbnail">
 
-                  {% block content %}
+                  {% block content_staff %}
                   {% endblock %}
 
                 </div>

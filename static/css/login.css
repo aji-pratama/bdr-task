@@ -15,10 +15,24 @@
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #3e3838 !important;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    color: #3e3838 !important;
+    background-color: #fff !important;
+    border-color: #3e3838 !important;
+    border: 1px solid;
+}
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #f2f2f2;
+  background: #fff;
   width: 100%;
   border: 0;
   margin: 0 0 15px;
