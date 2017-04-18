@@ -39,3 +39,4 @@ class Datas(models.Model):
     data18 = models.IntegerField(null=True, blank=True)
     data19 = models.IntegerField(null=True, blank=True)
     data20 = models.IntegerField(null=True, blank=True)
+    hps    = models.BigIntegerField(null=True, blank=True)

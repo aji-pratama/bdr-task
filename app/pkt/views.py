@@ -46,6 +46,7 @@ def mandatory(request):
         data12 = str(request.POST.get('data12'))
         data13 = str(request.POST.get('data13'))
         data14 = str(request.POST.get('data14'))
+        hps = request.POST.get('hps')
 
         datas = Datas.objects.get(id=1)
 
@@ -53,6 +54,7 @@ def mandatory(request):
         datas.data12=data12
         datas.data13=data13
         datas.data14=data14
+        datas.hps = hps
 
         datas.save()
 
@@ -100,4 +102,17 @@ def mandatory_teknis(request):
 
 def summary(request):
     datas = Datas.objects.get(id=1)
-    return render(request, 'pkt/summary.html', {'datas': datas})
+    # for data in datas:
+    count1 = datas.data1 + datas.data2 + datas.data3 + datas.data4 + datas.data5 + datas.data6 + datas.data7 + datas.data8 + datas.data9 + datas.data10 + datas.data11 + datas.data12 + datas.data13 + datas.data14 + datas.data15 + datas.data16 + datas.data17
+    count2 = datas.data18 + datas.data19 + datas.data20
+    hps = datas.hps
+    ranges = ""
+    if hps >= 500000000 and hps <= 1000000000:
+        ranges = "Kecil"
+    elif hps >= 1000000001 and hps <= 3000000000:
+        ranges = "Sedang"
+    elif hps >= 3000000001 and hps <= 5000000000:
+        ranges = "Besar"
+    elif hps > 5000000000:
+        ranges = "BOD"
+    return render(request, 'pkt/summary.html', {'datas': datas, 'count1': count1, 'count2':count2, 'hps': hps, 'ranges':ranges })
