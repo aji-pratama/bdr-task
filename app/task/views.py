@@ -7,6 +7,8 @@ from .models import Task
 
 @login_required(login_url='/login')
 def input_task(request):
+    tasks = Task.objects.filter(created_by=request.user)
+
     if request.POST:
         title = request.POST.get('title')
         approval_status = False
@@ -20,6 +22,6 @@ def input_task(request):
         insert_data = Task(title=title, approval_status=approval_status, done_status=done_status, keterangan=keterangan, created_date=created_date, created_by=created_by, approval_by=approval_by, doing_date=doing_date)
         insert_data.save()
 
-        return render(request, 'staff/input_task.html')
+        return render(request, 'staff/input_task.html', {'tasks': tasks})
 
-    return render(request, 'staff/input_task.html')
+    return render(request, 'staff/input_task.html', {'tasks': tasks})
