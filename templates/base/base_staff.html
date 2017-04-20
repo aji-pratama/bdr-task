@@ -48,7 +48,7 @@
                 <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
                     <li><a href="{% url 'dashboard' %}">{{ user.email }}</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                   {% endif %}
                 </ul>
 
@@ -66,19 +66,17 @@
             <div class="col-md-3">
                 <p class="lead">Side Menu</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">Input Task Plan</a>
+                    <a href="{% url 'input_task' %}" class="list-group-item active">Input Task Plan</a>
                     <a href="#" class="list-group-item">Task Approved</a>
                     <a href="#" class="list-group-item">Today Doing Task</a>
                 </div>
             </div>
 
             <div class="col-md-9">
-                <div class="thumbnail">
 
                   {% block content_staff %}
                   {% endblock %}
 
-                </div>
             </div>
 
         </div>

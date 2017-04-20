@@ -1,0 +1,201 @@
+[
+  {
+    "model": "pkt.pkt",
+    "pk": 1,
+    "fields": {
+      "teks": "Surat penawaran administrasi, teknis dan harga bermaterai, bertanggal, berstempel",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 2,
+    "fields": {
+      "teks": "Surat penawaran mencantumkan mencantumkan masa berlaku penawaran tanpa mencantumkan harga penawaran",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 3,
+    "fields": {
+      "teks": "Surat pernyataan jaminan mutu dan garansi",
+      "koef": 4,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 4,
+    "fields": {
+      "teks": "Melampirkan TDP, SITU, SIUP untuk pekerjaan jasa",
+      "koef": 10,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 5,
+    "fields": {
+      "teks": "Melampirkan SPT 2016, SSP 3 Bulan Terakhir",
+      "koef": 5,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 6,
+    "fields": {
+      "teks": "Surat pernyataan minat mengikuti pengadaan",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 7,
+    "fields": {
+      "teks": "Surat Pernyataan Tidak Pailit",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 8,
+    "fields": {
+      "teks": "Tidak masuk daftar hitam",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 9,
+    "fields": {
+      "teks": "Surat Pernyataan tidak dalam pengawasan pengadilan, tidak bangkrut, kegiatan usahanya tidak sedang dihentikan dan tidak sedang menjalani sanksi pidana",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 10,
+    "fields": {
+      "teks": "Pakta Integritas",
+      "koef": 3,
+      "kode": "standard"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 11,
+    "fields": {
+      "teks": "Melampirkan pengalaman perusahaan, kemampuan teknis pada pekjerjaan sejenis",
+      "koef": 7,
+      "kode": "mandatory"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 12,
+    "fields": {
+      "teks": "Surat dukungan dari MITRA",
+      "koef": 5,
+      "kode": "mandatory"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 13,
+    "fields": {
+      "teks": "Sertifikat tertentu",
+      "koef": 8,
+      "kode": "mandatory"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 14,
+    "fields": {
+      "teks": "SDM tersertifikat",
+      "koef": 5,
+      "kode": "mandatory"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 15,
+    "fields": {
+      "teks": "Jaminan Penawaran",
+      "koef": 5,
+      "kode": "finance"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 16,
+    "fields": {
+      "teks": "Risk level",
+      "koef": 8,
+      "kode": "finance"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 17,
+    "fields": {
+      "teks": "Profit level",
+      "koef": 12,
+      "kode": "finance"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 18,
+    "fields": {
+      "teks": "Scope pekerjaan",
+      "koef": 5,
+      "kode": "mandatory_tek"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 19,
+    "fields": {
+      "teks": "Lama pengerjaan",
+      "koef": 2,
+      "kode": "mandatory_tek"
+    }
+  },
+
+  {
+    "model": "pkt.pkt",
+    "pk": 20,
+    "fields": {
+      "teks": "Outsource / internal team",
+      "koef": 3,
+      "kode": "mandatory_tek"
+    }
+  },
+]

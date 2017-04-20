@@ -31,6 +31,7 @@ class LoginView(generic.FormView):
 
         if user is not None and user.is_active:
             login(self.request, user)
+
             return super(LoginView, self).form_valid(form)
         else:
             return self.form_invalid(form)
