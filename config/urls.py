@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^logout/$', LogOutView.as_view(), name='logout'),
     url(r'^dashboard/$', account_views.dashboard, name='dashboard'),
     url(r'^input-task/$', task_views.input_task, name='input_task'),
+    url(r'^delete-task-(?P<pk>\d+)$', task_views.delete_task, name='delete_task'),
+
 
     #asr
     url(r'^pkt/', include('app.pkt.pkt_urls')),
