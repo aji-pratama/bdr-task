@@ -1,0 +1,23 @@
+{% extends "base/base_atasan.html" %}
+{% block content_atasan %}
+<div class="col-md-6">
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+       Staff List
+    </div>
+
+    <div class="panel-body">
+      <ul class="list-group">
+        {% for staff in staff_atasan %}
+        <li class="list-group-item">
+          <a href="{% url 'task_by' staff.id %}"><strong>{{ staff.email }}</strong></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

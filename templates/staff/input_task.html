@@ -1,4 +1,5 @@
 {% extends "base/base_staff.html" %}
+{% load static %}
 {% block content_staff %}
 
 
@@ -22,14 +23,13 @@
           <textarea name="keterangan" placeholder="Keterangan Task" class="form-control"></textarea>
         </div>
 
-        <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg">
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md">
       </div>
     </form>
   </div>
 </div>
 
 <div class="col-md-6">
-
   <div class="panel panel-default">
 
     <div class="panel-heading">
@@ -41,12 +41,16 @@
         {% for task in tasks %}
         <li class="list-group-item">
           <a href="#"><strong>{{ task.title }}</strong></a>
-          <a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> <i class="fa fa-trash-o"></i></a>
+          <a  href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
         </li>
         {% endfor %}
       </ul>
-      </>
     </div>
+    
   </div>
+</div>
 
-  {% endblock %}
+<script src="{% static '/js/jquery-3.1.1.js' %}"></script>
+<script></script>
+
+{% endblock %}

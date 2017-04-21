@@ -10,9 +10,16 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogOutView.as_view(), name='logout'),
     url(r'^dashboard/$', account_views.dashboard, name='dashboard'),
+
+    #Staff
     url(r'^input-task/$', task_views.input_task, name='input_task'),
     url(r'^delete-task-(?P<pk>\d+)$', task_views.delete_task, name='delete_task'),
+    url(r'^doing-task/$', task_views.doing_task, name='doing_task'),
+    url(r'^cek-done-(?P<pk>\d+)$', task_views.cek_done, name='cek_done'),
 
+    #Atasan
+    url(r'^task-approval/$', task_views.task_approval, name='task_approval'),
+    url(r'^task-approval/task-by-user(?P<pk>\d+)$', task_views.task_by, name='task_by'),
 
     #asr
     url(r'^pkt/', include('app.pkt.pkt_urls')),

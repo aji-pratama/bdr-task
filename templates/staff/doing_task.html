@@ -1,0 +1,46 @@
+{% extends "base/base_staff.html" %}
+{% load static %}
+{% block content_staff %}
+<div class="col-md-6">
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+       Today Doing Task Lists
+    </div>
+
+    <div class="panel-body">
+      <ul class="list-group">
+        {% for task in doing_tasks %}
+        <li class="list-group-item">
+          <a href="#"><strong>{{ task.title }}</strong></a>
+          <a  href="{% url 'cek_done' task.id %}" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+       Task Done
+    </div>
+
+    <div class="panel-body">
+      <ul class="list-group">
+        {% for task in done_tasks %}
+        <li class="list-group-item">
+          <a href="#"><strong>{{ task.title }}</strong></a>
+          <a  href="" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

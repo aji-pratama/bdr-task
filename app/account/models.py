@@ -34,6 +34,7 @@ class MyUser(AbstractBaseUser):
         unique=True,
     )
     is_atasan = models.BooleanField(default=False)
+    is_staf = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     atasan = models.ForeignKey('MyUser', null=True, blank=True)

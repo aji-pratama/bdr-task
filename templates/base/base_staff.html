@@ -65,11 +65,12 @@
 
             <div class="col-md-3">
                 <p class="lead">Side Menu</p>
+                {% with request.resolver_match.url_name as url_name %}
                 <div class="list-group">
-                    <a href="{% url 'input_task' %}" class="list-group-item active">Input Task Plan</a>
-                    <a href="#" class="list-group-item">Task Approved</a>
-                    <a href="#" class="list-group-item">Today Doing Task</a>
+                    <a href="{% url 'input_task' %}" class="list-group-item {% if url_name == 'input_task' %}active{% endif %}">Input Task Plan</a>
+                    <a href="{% url 'doing_task' %}" class="list-group-item {% if url_name == 'doing_task' %}active{% endif %}">Today Doing Task</a>
                 </div>
+                {% endwith %}
             </div>
 
             <div class="col-md-9">
