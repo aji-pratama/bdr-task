@@ -76,13 +76,35 @@ def task_approval(request):
 @login_required(login_url='/login')
 @user_passes_test(lambda u:u.is_atasan, login_url='/login')
 def task_by(request, pk):
-    tasks = Task.objects.filter(created_by_id=pk)
+    tasks = Task.objects.filter(created_by_id=pk, approval_status=False
+                                ).order_by('-id')
     staf = MyUser.objects.get(id=pk)
-    return render(request, 'atasan/task_by.html', {'tasks' : tasks, 'staf': staf })
+    task_approved = Task.objects.filter(created_by_id=pk, approval_status=True
+                                        ).order_by('-id')
+    return render(request, 'atasan/task_by.html', {'tasks' : tasks, 'staf': staf, 'task_approved': task_approved })
 
+#Button To Approve Tasks
+@login_required(login_url='/login')
+@user_passes_test(lambda u:u.is_atasan, login_url='/login')
+def approve(request, pk):
+    task = Task.objects.get(id=pk)
+    task.approval_status = True
+    task.save()
 
+    staf = task.created_by_id
 
+    return HttpResponseRedirect('/task-approval/task-by-user%s' % staf)
 
+@login_required(login_url='/login')
+@user_passes_test(lambda u:u.is_atasan, login_url='/login')
+def cancel_approve(request, pk):
+    task = Task.objects.get(id=pk)
+    task.approval_status = False
+    task.save()
+
+    staf = task.created_by_id
+
+    return HttpResponseRedirect('/task-approval/task-by-user%s' % staf)
 
 
 

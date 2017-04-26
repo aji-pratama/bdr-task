@@ -20,6 +20,8 @@ urlpatterns = [
     #Atasan
     url(r'^task-approval/$', task_views.task_approval, name='task_approval'),
     url(r'^task-approval/task-by-user(?P<pk>\d+)$', task_views.task_by, name='task_by'),
+    url(r'^task-approval/approve(?P<pk>\d+)/$', task_views.approve, name='approve'),
+    url(r'^task-approval/cancel-approve(?P<pk>\d+)/$', task_views.cancel_approve, name='cancel_approve'),
 
     #asr
     url(r'^pkt/', include('app.pkt.pkt_urls')),

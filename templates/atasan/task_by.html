@@ -12,7 +12,28 @@
         {% for task in tasks %}
         <li class="list-group-item">
           <strong>{{ task.title }}</strong>
-          <input type="checkbox" value="True" class="checkbox-inline" style="float: right;">
+          <a href="{% url 'approve' task.id %}" class="btn btn-success btn-xs" style="float: right;">approve</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+       Task List Approved
+    </div>
+
+    <div class="panel-body">
+      <ul class="list-group">
+        {% for task in task_approved %}
+        <li class="list-group-item">
+          <strong>{{ task.title }}</strong>
+          <a href="{% url 'cancel_approve' task.id %}" class="btn btn-warning btn-xs" style="float: right;">cancel</a>
         </li>
         {% endfor %}
       </ul>
