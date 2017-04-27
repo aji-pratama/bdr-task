@@ -76,11 +76,11 @@ def task_approval(request):
 @login_required(login_url='/login')
 @user_passes_test(lambda u:u.is_atasan, login_url='/login')
 def task_by(request, pk):
-    tasks = Task.objects.filter(created_by_id=pk, approval_status=False
-                                ).order_by('-id')
+    tasks = Task.objects.filter(created_by_id=pk, approval_status=False,
+                                created_date=datetime.now().date()).order_by('-id')
     staf = MyUser.objects.get(id=pk)
-    task_approved = Task.objects.filter(created_by_id=pk, approval_status=True
-                                        ).order_by('-id')
+    task_approved = Task.objects.filter(created_by_id=pk, approval_status=True,
+                                created_date=datetime.now().date()).order_by('-id')
     return render(request, 'atasan/task_by.html', {'tasks' : tasks, 'staf': staf, 'task_approved': task_approved })
 
 #Button To Approve Tasks
