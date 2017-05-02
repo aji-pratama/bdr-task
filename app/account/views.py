@@ -8,7 +8,13 @@ from django.core.urlresolvers import reverse_lazy
 from .forms import LoginForm
 
 def index(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated and request.user.is_atasan:
+        return render(request, 'atasan/index_atasan.html')
+
+    if request.user.is_authenticated and not request.user.is_atasan:
+        return render(request, 'staff/index_staff.html')
+
+    return HttpResponseRedirect('/login')
 
 def  dashboard(request):
     if request.user.is_authenticated and request.user.is_atasan:
