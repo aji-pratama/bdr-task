@@ -22,7 +22,12 @@ def input_task(request):
         created_date = date.today()
         created_by = request.user
         approval_by = request.user.atasan
-        doing_date = date.today() + timedelta(days=1)
+
+        #If today is Friday then doing date is Monday, else just tomorrow
+        if datetime.today().weekday() == 5:
+            doing_date = date.today() + timedelta(days=3)
+        else:
+            doing_date = date.today() + timedelta(days=1)
 
         insert_data = Task(title=title, approval_status=approval_status, done_status=done_status, keterangan=keterangan, created_date=created_date, created_by=created_by, approval_by=approval_by, doing_date=doing_date)
         insert_data.save()
