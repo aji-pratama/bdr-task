@@ -9,12 +9,19 @@
 
     <div class="panel-body">
       <ul class="list-group">
+      {% if tasks %}
         {% for task in tasks %}
         <li class="list-group-item">
           <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
           <a href="{% url 'approve' task.id %}" class="btn btn-success btn-xs" style="float: right;">approve</a>
         </li>
         {% endfor %}
+
+      {% else %}
+        <h5 style="text-align: center">Task kosong</h5>
+
+      {% endif %}
+
       </ul>
     </div>
 
@@ -30,12 +37,19 @@
 
     <div class="panel-body">
       <ul class="list-group">
+      {% if task_approved %}
         {% for task in task_approved %}
         <li class="list-group-item">
           <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
           <a href="{% url 'cancel_approve' task.id %}" class="btn btn-warning btn-xs" style="float: right; right; margin: 1px"> cancel </a>
         </li>
         {% endfor %}
+
+      {% else %}
+        <h5 style="text-align: center">Task kosong</h5>
+
+      {% endif %}
+
       </ul>
     </div>
 

@@ -10,12 +10,18 @@
 
     <div class="panel-body">
       <ul class="list-group">
+      {% if doing_tasks %}
         {% for task in doing_tasks %}
         <li class="list-group-item">
           <a href="#"><strong>{{ task.title }}</strong></a>
           <a  href="{% url 'cek_done' task.id %}" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
         </li>
         {% endfor %}
+
+      {% else %}
+            <h5 style="text-align: center">Task kosong</h5>
+
+      {% endif %}
       </ul>
     </div>
 
@@ -31,12 +37,18 @@
 
     <div class="panel-body">
       <ul class="list-group">
+      {% if done_tasks %}
         {% for task in done_tasks %}
         <li class="list-group-item">
           <a href="#"><strong>{{ task.title }}</strong></a>
           <a  href="" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
         </li>
         {% endfor %}
+
+      {% else %}
+          <h5 style="text-align: center">Task kosong</h5>
+
+      {% endif %}
       </ul>
     </div>
 

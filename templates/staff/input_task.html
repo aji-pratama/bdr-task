@@ -38,19 +38,31 @@
 
     <div class="panel-body">
       <ul class="list-group">
+      {% if tasks %}
         {% for task in tasks %}
         <li class="list-group-item">
           <a href="#"><strong>{{ task.title }}</strong></a>
-          <a  href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
+          <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
         </li>
         {% endfor %}
+
+      {% else %}
+          <h5 style="text-align: center">Task kosong</h5>
+
+      {% endif %}
       </ul>
     </div>
-    
+
   </div>
 </div>
 
 <script src="{% static '/js/jquery-3.1.1.js' %}"></script>
-<script></script>
+<script>
+$(document).ready(function() {
+  $(document).on('click', '#confirm-delete', function(){
+      return confirm('Apakah anda yakin akan menghapus ini?');
+  });
+});
+</script>
 
 {% endblock %}

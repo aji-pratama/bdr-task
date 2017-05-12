@@ -10,4 +10,5 @@ urlpatterns = [
         url(r'^financial$', views.financial, name='financial'),
         url(r'^mandatory-teknis$', views.mandatory_teknis, name='mandatory_teknis'),
         url(r'^summary$', views.summary, name='summary'),
-]
+        url(r'^export/xls/$', views.export_users_xls, name='export_xls'),
+    ]
