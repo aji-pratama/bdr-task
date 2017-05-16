@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'app.account',
     'app.task',
     'app.pkt',
+    'app.opreport',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +68,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bdr_task', #db_name
+        'HOST': '127.0.0.1', #db_server
+        'USER': 'root', #db_username
+        'PASSWORD': '', #db_password
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 

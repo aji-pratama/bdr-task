@@ -26,4 +26,8 @@ urlpatterns = [
     #asr
     url(r'^pkt/', include('app.pkt.pkt_urls')),
 
+    #Operation Report
+    url(r'^operation-report/', include('app.opreport.opreport_urls')),
+
+
 ]
