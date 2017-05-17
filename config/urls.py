@@ -29,5 +29,7 @@ urlpatterns = [
     #Operation Report
     url(r'^operation-report/', include('app.opreport.opreport_urls')),
 
+    #Testing way
+    url(r'^testing/', include('app.testing.testing_urls')),
 
 ]

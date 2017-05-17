@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'app.task',
     'app.pkt',
     'app.opreport',
+    'app.testing',
 ]
 
 MIDDLEWARE = [

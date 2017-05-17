@@ -33,7 +33,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="" class="img-circle profile_img">
+                {# <img src="" alt="" class="img-circle profile_img">#}
               </div>
               <div class="profile_info">
                 <span>Welcome</span>
@@ -163,6 +163,8 @@
 
     <!-- jQuery -->
     <script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
     <!-- Bootstrap -->
     <script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!-- Autosize -->
