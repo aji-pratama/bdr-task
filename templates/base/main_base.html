@@ -1,23 +1,8 @@
 {% load crispy_forms_tags %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>BDR Indonesia</title>
-
-    <!-- Bootstrap -->
-    <link href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="{% static '/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="{% static '/build/css/custom.min.css' %}" rel="stylesheet">
-  </head>
+  {% include "base/include/head.html" %}
 
   <body class="nav-md">
     <div class="container body">
@@ -49,23 +34,8 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
-                  </li>
+                  {% include "base/side_menu/task.html" %}
+                  {% include "base/side_menu/opreport.html" %}
                 </ul>
               </div>
             </div>
@@ -160,17 +130,6 @@
         <!-- /footer content -->
       </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
-    {% block javascript %}
-    {% endblock %}
-    <!-- Bootstrap -->
-    <script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <!-- Autosize -->
-    <script src="{% static '/vendors/autosize/dist/autosize.min.js' %}"></script>
-    <!--JS Custom from gentelela-->
-    <script src="{% static '/build/js/custom.min.js' %}"></script>
-
+    {% include "base/include/javascript.html" %}
   </body>
 </html>
