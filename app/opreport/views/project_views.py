@@ -6,9 +6,14 @@ from app.opreport.forms import ProjectForm
 from django.http import HttpResponse, HttpResponseRedirect
 
 def index(request):
+    projects = Project.objects.all().order_by('id')
+    form = ProjectForm()
+    return render(request, 'opreport/index.html', {'projects': projects, 'form': form})
+
+def forms(request):
     projects = Project.objects.all()
     form = ProjectForm()
-    return render(request, 'opreport/index.html', {'projects': projects, 'form':form})
+    return render(request, 'opreport/forms.html', {'projects': projects, 'form':form})
 
 
 def input_data(request):
@@ -26,12 +31,12 @@ def input_data(request):
         invoice_tahap1  = request.POST.get('invoice_tahap1')
         invoice_tahap2  = request.POST.get('invoice_tahap2')
         invoice_tahap3  = request.POST.get('invoice_tahap3')
-
+        remark = request.POST.get('remark')
         insert_data = Project(om=om,location=location, job_no=job_no,
                 project_name=project_name, spk_no=spk_no, value=value,
                 statuspr_material=statuspr_material, statuspr_fabrication=statuspr_fabrication,
                 statuspr_installation=statuspr_installation, invoice_tahap1=invoice_tahap1,
-                invoice_tahap2=invoice_tahap2, invoice_tahap3=invoice_tahap3)
+                invoice_tahap2=invoice_tahap2, invoice_tahap3=invoice_tahap3, remark=remark)
 
         insert_data.save()
         return HttpResponse('')

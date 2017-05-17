@@ -3,45 +3,83 @@
 
 {# BLOCK MAIN Content #}
 {% block content %}
-  <div class="page-title">
-    <div class="title_left">
-      <h3>Form Elements</h3>
+{% include "opreport/modal_input.html" %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> Project (JOB NO)</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
     </div>
 
-    <div class="title_right">
-      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-        </div>
+    <div class="x_content">
+      <div class="table-responsive">
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Project Data</button>
+        <table class="table table-bordered jambo_table">
+          <thead class="heading">
+            <tr>
+              <th class="column-title" rowspan="2" style="text-align: center">OM</th>
+              <th class="column-title" rowspan="2" style="text-align: center">Location</th>
+              <th class="column-title" rowspan="2" style="text-align: center">Job No</th>
+              <th class="column-title" rowspan="2" style="text-align: center">Project Name</th>
+              <th class="column-title" rowspan="2" style="text-align: center">SPK No</th>
+              <th class="column-title" rowspan="2" style="text-align: center">Value</th>
+              <th class="column-title" colspan="3" style="text-align: center">Status Progress</th>
+              <th class="column-title" colspan="3" style="text-align: center">Invoice</th>
+              <th class="column-title" rowspan="2" style="text-align: center">Remark</th>
+              <th class="column-title" rowspan="2" style="text-align: center"><span class="nobr">Action</span>
+              </th>
+              <th class="bulk-actions" colspan="7">
+                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+              </th>
+            </tr>
+
+            <tr>
+              <th class="column-title" style="text-align: center">Progress Material</th>
+              <th class="column-title" style="text-align: center">Progress Fabrication</th>
+              <th class="column-title" style="text-align: center">Progress Installation</th>
+              <th class="column-title" style="text-align: center">Tahap 1</th>
+              <th class="column-title" style="text-align: center">Tahap 2</th>
+              <th class="column-title" style="text-align: center">Tahap 3</th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for project in projects %}
+
+            <tr class="even pointer">
+              <td class="">{{ project.om }}</td>
+              <td class="">{{ project.location }}</td>
+              <td class="">{{ project.job_no }}</td>
+              <td class="">{{ project.project_name }}</td>
+              <td class="">{{ project.spk_no }}</td>
+              <td class="">{{ project.value }}</td>
+              <td class="">{{ project.statuspr_material }}</td>
+              <td class="">{{ project.statuspr_fabrication }}</td>
+              <td class="">{{ project.statuspr_installation }}</td>
+              <td class="">{{ project.invoice_tahap1 }}</td>
+              <td class="">{{ project.invoice_tahap2 }}</td>
+              <td class="">{{ project.invoice_tahap3 }}</td>
+              <td class="">{{ project.remark }}</td>
+              <td class="">
+                <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
+
+
     </div>
   </div>
-  <div class="clearfix"></div>
-
-  {# FOrm andalan #}
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Form Input Project</h2>
-          <ul class="nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-          </ul>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <br />
-
-
-            {% crispy form %}
-
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 {% endblock %}
 
 

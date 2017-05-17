@@ -1,3 +1,4 @@
+{% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>BDR-Indonesia</span></a>
+              <a href="index.html" class="site_title"></i> <span>BDR-Indonesia</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -32,7 +33,7 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>MENU</h3>
                 <ul class="nav side-menu">
                   {% include "base/side_menu/task.html" %}
                   {% include "base/side_menu/opreport.html" %}
@@ -130,6 +131,16 @@
         <!-- /footer content -->
       </div>
     </div>
-    {% include "base/include/javascript.html" %}
+    <!-- jQuery -->
+    <script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
+    <!-- Bootstrap -->
+    <script src="{% static '/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Autosize -->
+    <script src="{% static '/vendors/autosize/dist/autosize.min.js' %}"></script>
+    <!--JS Custom from gentelela-->
+    <script src="{% static '/build/js/custom.min.js' %}"></script>
+
   </body>
 </html>

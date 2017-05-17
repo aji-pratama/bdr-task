@@ -3,7 +3,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from .forms import ArticleForm
 from .models import Article
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.core import serializers
+# import json
 
 def index(request):
     form = ArticleForm()
@@ -25,3 +27,9 @@ def input_data(request):
 
         insert_data.save()
         return HttpResponse('/testing')
+
+def get_data(request):
+    # serialize queryset
+    some_queryset = Article.objects.all()
+    serialized_queryset = serializers.serialize('json', some_queryset)
+    return HttpResponse(serialized_queryset)

@@ -11,7 +11,7 @@ class ProjectForm(forms.ModelForm):
         fields = ('om', 'location', 'job_no', 'project_name',
                 'spk_no', 'value', 'statuspr_material',
                 'statuspr_fabrication', 'statuspr_installation',
-                'invoice_tahap1', 'invoice_tahap2', 'invoice_tahap3')
+                'invoice_tahap1', 'invoice_tahap2', 'invoice_tahap3', 'remark')
 
     def __init__(self, *args, **kwargs):
         super(ProjectForm, self).__init__(*args, **kwargs)
@@ -27,7 +27,7 @@ class ProjectForm(forms.ModelForm):
                      css_class='col-md-6'),
 
                 Div('value', 'statuspr_material','statuspr_fabrication', 'statuspr_installation',
-                    'invoice_tahap1', 'invoice_tahap2', 'invoice_tahap3',
+                    'invoice_tahap1', 'invoice_tahap2', 'invoice_tahap3', 'remark',
                     Div(
                         Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
                     ),

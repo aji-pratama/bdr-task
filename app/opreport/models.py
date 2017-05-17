@@ -20,6 +20,7 @@ class Project(models.Model):
     invoice_tahap1 = models.CharField(max_length=100, blank=True, null=True)
     invoice_tahap2 = models.CharField(max_length=100, blank=True, null=True)
     invoice_tahap3 = models.CharField(max_length=100, blank=True, null=True)
+    remark = models.CharField(max_length=220, blank=True, null=True)
 
     def __unicode__(self):
 		return self.project_name

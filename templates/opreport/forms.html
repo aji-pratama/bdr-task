@@ -1,0 +1,96 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+
+{# BLOCK MAIN Content #}
+{% block content %}
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Form Elements</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  {# FOrm andalan #}
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Form Input Project</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br />
+
+
+            {% crispy form %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{# BLOCK javascript #}
+{% block javascript %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      alert("haha");
+      $(document).on('submit','#id_project_form', function(e){
+        e.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: '{% url "opreport:input_data" %}',
+          data: {
+            om: $('#id_om').val(),
+            location: $('#id_location').val(),
+            job_no: $('#id_job_no').val(),
+            project_name: $('#id_project_name').val(),
+            spk_no: $('#id_spk_no').val(),
+            value: $('#id_value').val(),
+            statuspr_material: $('#id_statuspr_material').val(),
+            statuspr_fabrication: $('#id_statuspr_fabrication').val(),
+            statuspr_installation: $('#id_statuspr_installation').val(),
+            invoice_tahap1: $('#id_invoice_tahap1').val(),
+            invoice_tahap2: $('#id_invoice_tahap2').val(),
+            invoice_tahap3: $('#id_invoice_tahap3').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          },
+
+          success:function(){
+            alert("sukses input");
+            om: $('#id_om').val('');
+            location: $('#id_location').val('');
+            job_no: $('#id_job_no').val('');
+            project_name: $('#id_project_name').val('');
+            spk_no: $('#id_spk_no').val('');
+            value: $('#id_value').val('');
+            statuspr_material: $('#id_statuspr_material').val('');
+            statuspr_fabrication: $('#id_statuspr_fabrication').val('');
+            statuspr_installation: $('#id_statuspr_installation').val('');
+            invoice_tahap1: $('#id_invoice_tahap1').val('');
+            invoice_tahap2: $('#id_invoice_tahap2').val('');
+            invoice_tahap3: $('#id_invoice_tahap3').val('');
+          }
+
+        });
+
+      });
+    });
+  </script>
+{% endblock %}
