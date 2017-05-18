@@ -40,6 +40,27 @@ class Quotation(models.Model):
     def __unicode__(self):
 		return self.costumer
 
+class Tender(models.Model):
+    OM_CHOICES = (
+        ('east', 'East'),
+        ('west', 'West'),
+    )
+
+    om = models.CharField(max_length=20, choices=OM_CHOICES)
+    quotation_no = models.CharField(max_length=20)
+    location = models.CharField(max_length=50)
+    tender_name = models.CharField(max_length=200)
+    rks_no = models.CharField(max_length=20)
+    process_egistration = models.DateField()
+    process_aanwizing = models.DateField()
+    process_penbid = models.DateField()
+    addcost_bidbond = models.CharField(max_length=100)
+    addcost_reffbank = models.CharField(max_length=100)
+    addcost_document = models.CharField(max_length=100)
+    remark = models.CharField(max_length=220)
+
+    def __unicode__(self):
+		return self.quotation_no
 
 
 

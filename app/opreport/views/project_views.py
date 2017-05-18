@@ -3,20 +3,32 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from app.opreport.models import Project
 from app.opreport.forms import ProjectForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def index(request):
-    projects = Project.objects.all().order_by('id')
-    form = ProjectForm()
-    return render(request, 'opreport/index.html', {'projects': projects, 'form': form})
+def index_project(request):
+    try:
+        form = ProjectForm()
+        project_list = Project.objects.all()
+        # if request.POST:
+        #     q = request.POST.get('q')
+        #     project_list = Project.objects.filter(om__contains=q)
 
-def forms(request):
-    projects = Project.objects.all()
-    form = ProjectForm()
-    return render(request, 'opreport/forms.html', {'projects': projects, 'form':form})
+        paginator = Paginator(project_list, 5) # Show 25 contacts per page
 
+        page = request.GET.get('page')
+        try:
+            projects = paginator.page(page)
+        except PageNotAnInteger:
+            projects = paginator.page(1)
+        except EmptyPage:
+            projects = paginator.page(paginator.num_pages)
 
-def input_data(request):
+    except Project.DoesNotExist:
+        raise Http404("Category Does Not Exist")
+    return render(request, 'opreport/project/index.html', {'projects': projects, 'form': form})
+
+def input_project(request):
     if request.POST:
         title = request.POST.get('title')
         om  = request.POST.get('om')
@@ -40,3 +52,28 @@ def input_data(request):
 
         insert_data.save()
         return HttpResponse('')
+
+def delete_project(request, pk):
+    project = Project.objects.get(id=pk)
+    project.delete()
+
+    return HttpResponseRedirect('/operation-report/project')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#

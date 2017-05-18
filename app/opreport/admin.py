@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Project, Quotation
+from .models import Project, Quotation, Tender
 from django.contrib import admin
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -16,3 +16,10 @@ class QuotationAdmin(admin.ModelAdmin):
 	list_per_page = 20
 
 admin.site.register(Quotation, QuotationAdmin)
+
+class TenderAdmin(admin.ModelAdmin):
+	list_display = ['om', 'quotation_no', 'location', 'tender_name']
+	search_fields = ['om', 'quotation_no', 'location', 'tender_name']
+	list_per_page = 20
+
+admin.site.register(Tender, TenderAdmin)
