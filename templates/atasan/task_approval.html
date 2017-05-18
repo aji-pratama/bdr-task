@@ -1,23 +1,39 @@
-{% extends "base/base_atasan.html" %}
-{% block content_atasan %}
-<div class="col-md-6">
-  <div class="panel panel-default">
-
-    <div class="panel-heading">
-       Staff List
-    </div>
-
-    <div class="panel-body">
-      <ul class="list-group">
-        {% for staff in staff_atasan %}
-        <li class="list-group-item">
-          <a href="{% url 'task_by' staff.id %}"><strong>{{ staff.email }}</strong></a>
+{% extends "base/main_base.html" %}
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> BDR Task</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
-        {% endfor %}
-      </ul>
-    </div>
-
+      </li>
+    </ul>
+    <div class="clearfix"></div>
   </div>
+
+  <div class="x_content">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          Staff List
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+            {% for staff in staff_atasan %}
+            <li class="list-group-item">
+              <a href="{% url 'task_by' staff.id %}"><strong>{{ staff.email }}</strong></a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 {% endblock %}

@@ -1,87 +1,103 @@
-{% extends "base/base_atasan.html" %}
-{% block content_atasan %}
-<div class="col-md-6">
-  <div class="panel panel-default">
-
-    <div class="panel-heading">
-       Task List by {{ staf.email }}
-    </div>
-
-    <div class="panel-body">
-      <ul class="list-group">
-      {% if tasks %}
-        {% for task in tasks %}
-        <li class="list-group-item">
-          <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
-          <a href="{% url 'approve' task.id %}" class="btn btn-success btn-xs" style="float: right;">approve</a>
+{% extends "base/main_base.html" %}
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> BDR Task</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
-        {% endfor %}
-
-      {% else %}
-        <h5 style="text-align: center">Task kosong</h5>
-
-      {% endif %}
-
-      </ul>
-    </div>
-
+      </li>
+    </ul>
+    <div class="clearfix"></div>
   </div>
-</div>
 
-<div class="col-md-6">
-  <div class="panel panel-default">
+  <div class="x_content">
+    <div class="col-md-6">
+      <div class="panel panel-default">
 
-    <div class="panel-heading">
-       Task List Approved
-    </div>
+        <div class="panel-heading">
+          Task List by {{ staf.email }}
+        </div>
 
-    <div class="panel-body">
-      <ul class="list-group">
-      {% if task_approved %}
-        {% for task in task_approved %}
-        <li class="list-group-item">
-          <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
-          <a href="{% url 'cancel_approve' task.id %}" class="btn btn-warning btn-xs" style="float: right; right; margin: 1px"> cancel </a>
-        </li>
-        {% endfor %}
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if tasks %}
+            {% for task in tasks %}
+            <li class="list-group-item">
+              <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
+              <a href="{% url 'approve' task.id %}" class="btn btn-success btn-xs" style="float: right;">approve</a>
+            </li>
+            {% endfor %}
 
-      {% else %}
-        <h5 style="text-align: center">Task kosong</h5>
+            {% else %}
+            <h5 style="text-align: center">Task kosong</h5>
 
-      {% endif %}
+            {% endif %}
 
-      </ul>
-    </div>
+          </ul>
+        </div>
 
-  </div>
-</div>
-
-
-
-{% for task in task_approved %}
-<!-- Modal -->
-<div class="modal fade" id="modalapvd{{ task.id }}" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ task.title }}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{ task.keterangan }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          Task List Approved
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if task_approved %}
+            {% for task in task_approved %}
+            <li class="list-group-item">
+              <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
+              <a href="{% url 'cancel_approve' task.id %}" class="btn btn-warning btn-xs" style="float: right; right; margin: 1px"> cancel </a>
+            </li>
+            {% endfor %}
+
+            {% else %}
+            <h5 style="text-align: center">Task kosong</h5>
+
+            {% endif %}
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    {% for task in task_approved %}
+    <!-- Modal -->
+    <div class="modal fade" id="modalapvd{{ task.id }}" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{{ task.title }}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{ task.keterangan }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
   </div>
+
+
 </div>
-{% endfor %}
-
 </div>
-
-
+</div>
 {% endblock %}

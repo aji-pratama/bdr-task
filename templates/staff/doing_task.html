@@ -1,58 +1,74 @@
-{% extends "base/base_staff.html" %}
+{% extends "base/main_base.html" %}
 {% load static %}
-{% block content_staff %}
-<div class="col-md-6">
-  <div class="panel panel-default">
-
-    <div class="panel-heading">
-       Today Doing Task Lists
-    </div>
-
-    <div class="panel-body">
-      <ul class="list-group">
-      {% if doing_tasks %}
-        {% for task in doing_tasks %}
-        <li class="list-group-item">
-          <a href="#"><strong>{{ task.title }}</strong></a>
-          <a  href="{% url 'cek_done' task.id %}" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> BDR Task</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
-        {% endfor %}
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
 
-      {% else %}
+  <div class="x_content">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          Today Doing Task Lists
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if doing_tasks %}
+            {% for task in doing_tasks %}
+            <li class="list-group-item">
+              <a href="#"><strong>{{ task.title }}</strong></a>
+              <a  href="{% url 'cek_done' task.id %}" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
+            </li>
+            {% endfor %}
+
+            {% else %}
             <h5 style="text-align: center">Task kosong</h5>
 
-      {% endif %}
-      </ul>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
     </div>
 
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          Task Done
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if done_tasks %}
+            {% for task in done_tasks %}
+            <li class="list-group-item">
+              <a href="#"><strong>{{ task.title }}</strong></a>
+              <a  href="" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
+            </li>
+            {% endfor %}
+
+            {% else %}
+            <h5 style="text-align: center">Task kosong</h5>
+
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="col-md-6">
-  <div class="panel panel-default">
-
-    <div class="panel-heading">
-       Task Done
-    </div>
-
-    <div class="panel-body">
-      <ul class="list-group">
-      {% if done_tasks %}
-        {% for task in done_tasks %}
-        <li class="list-group-item">
-          <a href="#"><strong>{{ task.title }}</strong></a>
-          <a  href="" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
-        </li>
-        {% endfor %}
-
-      {% else %}
-          <h5 style="text-align: center">Task kosong</h5>
-
-      {% endif %}
-      </ul>
-    </div>
-
-  </div>
 </div>
 
 {% endblock %}

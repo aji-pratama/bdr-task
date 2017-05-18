@@ -1,66 +1,81 @@
-{% extends "base/base_staff.html" %}
+{% extends "base/main_base.html" %}
 {% load static %}
-{% block content_staff %}
+{% block content %}
 
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> BDR Task</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="col-md-6">
+  <div class="x_content">
+    <div class="col-md-6">
 
-  <div class="panel panel-default">
+      <div class="panel panel-default">
 
-    <div class="panel-heading">
-      New Task
+        <div class="panel-heading">
+          New Task
+        </div>
+
+        <form class="" action="{% url 'input_task' %}" method="post">{% csrf_token %}
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="title">Title Task</label>
+              <input type="text" name="title" placeholder="Title Task" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="keterangan">Keterangan Task</label>
+              <textarea name="keterangan" placeholder="Keterangan Task" class="form-control"></textarea>
+            </div>
+
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md">
+          </div>
+        </form>
+      </div>
     </div>
 
-    <form class="" action="{% url 'input_task' %}" method="post">{% csrf_token %}
-      <div class="panel-body">
-        <div class="form-group">
-          <label for="title">Title Task</label>
-          <input type="text" name="title" placeholder="Title Task" class="form-control">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          Task Lists
         </div>
 
-        <div class="form-group">
-          <label for="keterangan">Keterangan Task</label>
-          <textarea name="keterangan" placeholder="Keterangan Task" class="form-control"></textarea>
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if tasks %}
+            {% for task in tasks %}
+            <li class="list-group-item">
+              <a href="#"><strong>{{ task.title }}</strong></a>
+              <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
+            </li>
+            {% endfor %}
+
+            {% else %}
+            <h5 style="text-align: center">Task kosong</h5>
+
+            {% endif %}
+          </ul>
         </div>
 
-        <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md">
       </div>
-    </form>
+    </div>
   </div>
 </div>
-
-<div class="col-md-6">
-  <div class="panel panel-default">
-
-    <div class="panel-heading">
-       Task Lists
-    </div>
-
-    <div class="panel-body">
-      <ul class="list-group">
-      {% if tasks %}
-        {% for task in tasks %}
-        <li class="list-group-item">
-          <a href="#"><strong>{{ task.title }}</strong></a>
-          <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
-        </li>
-        {% endfor %}
-
-      {% else %}
-          <h5 style="text-align: center">Task kosong</h5>
-
-      {% endif %}
-      </ul>
-    </div>
-
-  </div>
 </div>
 
 <script src="{% static '/js/jquery-3.1.1.js' %}"></script>
 <script>
 $(document).ready(function() {
   $(document).on('click', '#confirm-delete', function(){
-      return confirm('Apakah anda yakin akan menghapus ini?');
+    return confirm('Apakah anda yakin akan menghapus ini?');
   });
 });
 </script>
