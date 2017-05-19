@@ -3,7 +3,7 @@
 
 {# BLOCK MAIN Content #}
 {% block content %}
-{% include "opreport/tender/modal_input_tender.html" %}
+{% include "opreport/delivery/modal_input_delivery.html" %}
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
@@ -18,7 +18,7 @@
 
   <div class="x_content">
     <div class="table-responsive">
-      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Tender Data</button>
+      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Delivery Data</button>
       <div class="form-group">
         <form class="form-inline" action="{% url 'opreport:index_project' %}" method="POST">{% csrf_token %}
           <input class="form-control" name="q" type="text" placeholder="Search">
@@ -30,17 +30,18 @@
           <tr>
             <th class="column-title" style="text-align: center">No</th>
             <th class="column-title" style="text-align: center">OM</th>
-            <th class="column-title" style="text-align: center">Quotation No</th>
             <th class="column-title" style="text-align: center">Location</th>
-            <th class="column-title" style="text-align: center">Tender Name</th>
-            <th class="column-title" style="text-align: center">RKS No</th>
-            <th class="column-title" style="text-align: center">Process Registration</th>
-            <th class="column-title" style="text-align: center">Process Aanwizing</th>
-            <th class="column-title" style="text-align: center">Process Open Bid</th>
-            <th class="column-title" style="text-align: center">Addcost Bid Bond</th>
-            <th class="column-title" style="text-align: center">Addcost Reff Bank</th>
-            <th class="column-title" style="text-align: center">Addcost Document</th>
-            <th class="column-title" style="text-align: center">Remark</th>
+            <th class="column-title" style="text-align: center">Job No</th>
+            <th class="column-title" style="text-align: center">Description Material</th>
+            <th class="column-title" style="text-align: center">Vendor</th>
+            <th class="column-title" style="text-align: center">Value DPP</th>
+            <th class="column-title" style="text-align: center">Value PPN</th>
+            <th class="column-title" style="text-align: center">Progress DO No</th>
+            <th class="column-title" style="text-align: center">Progress Lead Time</th>
+            <th class="column-title" style="text-align: center">Progress Pick Up</th>
+            <th class="column-title" style="text-align: center">Expedisi</th>
+            <th class="column-title" style="text-align: center">Order Status</th>
+            </th>
             <th class="column-title" style="text-align: center"><span class="nobr">Action</span>
             </th>
             <th class="bulk-actions" colspan="7">
@@ -50,26 +51,26 @@
         </thead>
 
         <tbody>
-          {% if tenders %}
-          {% for tender in tenders %}
+          {% if deliverys %}
+          {% for delivery in deliverys %}
 
           <tr class="even pointer">
-            <td>{{  forloop.counter0|add:tenders.start_index }} </td>
-            <td class="">{{ tender.om }}</td>
-            <td class="">{{ tender.quotation_no }}</td>
-            <td class="">{{ tender.location }}</td>
-            <td class="">{{ tender.tender_name }}</td>
-            <td class="">{{ tender.rks_no }}</td>
-            <td class="">{{ tender.process_registration }}</td>
-            <td class="">{{ tender.process_aanwizing }}</td>
-            <td class="">{{ tender.process_openbid }}</td>
-            <td class="">{{ tender.addcost_bidbond }}</td>
-            <td class="">{{ tender.addcost_reffbank }}</td>
-            <td class="">{{ tender.addcost_document }}</td>
-            <td class="">{{ tender.remark }}</td>
+            <td>{{  forloop.counter0|add:deliverys.start_index }} </td>
+            <td class="">{{ delivery.om }}</td>
+            <td class="">{{ delivery.location }}</td>
+            <td class="">{{ delivery.job_no }}</td>
+            <td class="">{{ delivery.description_material }}</td>
+            <td class="">{{ delivery.vendor }}</td>
+            <td class="">{{ delivery.value_dpp }}</td>
+            <td class="">{{ delivery.value_ppn }}</td>
+            <td class="">{{ delivery.progress_dono }}</td>
+            <td class="">{{ delivery.progress_leadtime }}</td>
+            <td class="">{{ delivery.progress_pickup }}</td>
+            <td class="">{{ delivery.expedisi }}</td>
+            <td class="">{{ delivery.order_status }}</td>
             <td class="">
               <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
-              <a id="confirm-delete" href="{% url 'opreport:delete_tender' tender.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+              <a id="confirm-delete" href="{% url 'opreport:delete_delivery' delivery.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -82,22 +83,22 @@
         </tbody>
       </table>
 
-      {% if tenders.has_other_pages %}
+      {% if deliverys.has_other_pages %}
       <ul class="pagination">
-        {% if tenders.has_previous %}
-        <li><a href="?page={{ tenders.previous_page_number }}">&laquo;</a></li>
+        {% if deliverys.has_previous %}
+        <li><a href="?page={{ deliverys.previous_page_number }}">&laquo;</a></li>
         {% else %}
         <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
-        {% for i in tenders.paginator.page_range %}
-        {% if tenders.number == i %}
+        {% for i in deliverys.paginator.page_range %}
+        {% if deliverys.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
         <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
-        {% if tenders.has_next %}
-        <li><a href="?page={{ tenders.next_page_number }}">&raquo;</a></li>
+        {% if deliverys.has_next %}
+        <li><a href="?page={{ deliverys.next_page_number }}">&raquo;</a></li>
         {% else %}
         <li class="disabled"><span>&raquo;</span></li>
         {% endif %}

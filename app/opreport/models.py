@@ -66,14 +66,19 @@ class Tender(models.Model):
 		return self.quotation_no
 
 class Delivery(models.Model):
-    om = models.CharField(max_length=200)
+    OM_CHOICES = (
+        ('east', 'East'),
+        ('west', 'West'),
+    )
+
+    om = models.CharField(max_length=20, choices=OM_CHOICES)
     location = models.CharField(max_length=200)
     job_no = models.CharField(max_length=200)
     description_material = models.CharField(max_length=200)
     vendor = models.CharField(max_length=200)
     value_dpp = models.CharField(max_length=200)
     value_ppn = models.CharField(max_length=200)
-	progress_dono = models.CharField(max_length=200)
+    progress_dono = models.CharField(max_length=200)
     progress_leadtime = models.CharField(max_length=200)
     progress_pickup = models.CharField(max_length=200)
     expedisi = models.CharField(max_length=200)

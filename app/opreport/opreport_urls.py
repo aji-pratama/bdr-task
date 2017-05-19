@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import project_views, quotation_views, tender_views
+from .views import project_views, quotation_views, tender_views, delivery_views
 
 app_name = 'opreport'
 
@@ -18,4 +18,9 @@ urlpatterns = [
         url(r'^tender/$', tender_views.index_tender, name='index_tender'),
         url(r'^input-tender/$', tender_views.input_tender, name='input_tender'),
         url(r'^delete-tender-(?P<pk>\d+)$', tender_views.delete_tender, name='delete_tender'),
+
+        # PI & Delivery
+        url(r'^delivery/$', delivery_views.index_delivery, name='index_delivery'),
+        url(r'^input-delivery/$', delivery_views.input_delivery, name='input_delivery'),
+        url(r'^delete-delivery-(?P<pk>\d+)$', delivery_views.delete_delivery, name='delete_delivery'),
     ]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Project, Quotation, Tender
+from .models import Project, Quotation, Tender, Delivery
 from django.contrib import admin
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -23,3 +23,6 @@ class TenderAdmin(admin.ModelAdmin):
 	list_per_page = 20
 
 admin.site.register(Tender, TenderAdmin)
+
+#Admin Delivery
+admin.site.register(Delivery)#, DeliveryAdmin)

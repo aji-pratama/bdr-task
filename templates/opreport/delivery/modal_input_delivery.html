@@ -1,0 +1,61 @@
+{# {% extends "base/main_base.html" %}#}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Modal -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Tender</h4>
+      </div>
+
+      <div class="modal-body">
+        {% crispy form %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{# BLOCK javascript #}
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+{% block javascript %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(document).on('submit','#id_delivery_form', function(e){
+        e.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: '{% url "opreport:input_delivery" %}',
+          data: {
+            om: $('#id_om').val(),
+            location: $('#id_location').val(),
+            job_no: $('#id_job_no').val(),
+            description_material: $('#id_description_material').val(),
+            vendor: $('#id_vendor').val(),
+            value_dpp: $('#id_value_dpp').val(),
+            value_ppn: $('#id_value_ppn').val(),
+            progress_dono: $('#id_progress_dono').val(),
+            progress_leadtime: $('#id_progress_leadtime').val(),
+            progress_pickup: $('#id_progress_pickup').val(),
+            expedisi: $('#id_expedisi').val(),
+            order_status: $('#id_order_status').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          },
+
+
+          success:function(data){
+            $('#myModal').modal('hide');
+            location.reload();
+          }
+
+        });
+
+      });
+    });
+  </script>
+{% endblock %}

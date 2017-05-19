@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Quotation, Tender
+from .models import Project, Quotation, Tender, Delivery
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, ButtonHolder, Submit, Div
 
@@ -96,3 +96,53 @@ class TenderForm(forms.ModelForm):
                 css_class='row'
             ),
         )
+
+# TENDER FORMS
+class DeliveryForm(forms.ModelForm):
+    class Meta:
+
+        model = Delivery
+        fields = ('om','location','job_no','description_material','vendor','value_dpp',
+                'value_ppn','progress_dono','progress_leadtime',
+                'progress_pickup','expedisi','order_status',)
+
+    def __init__(self, *args, **kwargs):
+        super(DeliveryForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_id = 'id_delivery_form'
+        self.helper.form_method = 'POST'
+        self.helper.form_tag = True
+        self.helper.layout = Layout(
+            Div(
+                Div('om','location','job_no','description_material','vendor','value_dpp',
+                     css_class='col-md-6'),
+
+                Div('value_ppn','progress_dono','progress_leadtime','progress_pickup','expedisi','order_status',
+                    Div(
+                        Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
+                    ),
+                     css_class='col-md-6'),
+                css_class='row'
+            ),
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
