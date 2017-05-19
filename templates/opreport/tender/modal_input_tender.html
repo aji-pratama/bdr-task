@@ -10,7 +10,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Quotation</h4>
+        <h4 class="modal-title">Add Tender</h4>
       </div>
 
       <div class="modal-body">
@@ -25,24 +25,28 @@
 {% block javascript %}
   <script type="text/javascript">
     $(document).ready(function() {
-      $(document).on('submit','#id_quotation_form', function(e){
+      $(document).on('submit','#id_tender_form', function(e){
         e.preventDefault();
 
         $.ajax({
           type: 'POST',
-          url: '{% url "opreport:input_quotation" %}',
+          url: '{% url "opreport:input_tender" %}',
           data: {
-            tanggal: $('#id_tanggal').val(),
-            inquiry_no: $('#id_inquiry_no').val(),
+            om: $('#id_om').val(),
             quotation_no: $('#id_quotation_no').val(),
-            costumer: $('#id_costumer').val(),
-            desc_material: $('#id_desc_material').val(),
-            qty: $('#id_qty').val(),
-            unit: $('#id_unit').val(),
-            bid_price: $('#id_bid_price').val(),
-            status: $('#id_status').val(),
+            location: $('#id_location').val(),
+            tender_name: $('#id_tender_name').val(),
+            rks_no: $('#id_rks_no').val(),
+            process_registration: $('#id_process_registration').val(),
+            process_aanwizing: $('#id_process_aanwizing').val(),
+            process_openbid: $('#id_process_openbid').val(),
+            addcost_bidbond: $('#id_addcost_bidbond').val(),
+            addcost_reffbank: $('#id_addcost_reffbank').val(),
+            addcost_document: $('#id_addcost_document').val(),
+            remark: $('#id_remark').val(),
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
           },
+
 
           success:function(data){
             $('#myModal').modal('hide');

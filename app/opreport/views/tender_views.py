@@ -44,7 +44,7 @@ def input_tender(request):
         remark = request.POST.get('remark')
         insert_data = Tender(om=om, quotation_no=quotation_no, location=location, tender_name=tender_name,
                     rks_no=rks_no, process_registration=process_registration, process_aanwizing=process_aanwizing,
-                    process_penbid=process_openbid, addcost_bidbond=addcost_bidbond, addcost_reffbank=addcost_reffbank,
+                    process_openbid=process_openbid, addcost_bidbond=addcost_bidbond, addcost_reffbank=addcost_reffbank,
                     addcost_document=addcost_document, remark=remark)
         insert_data.save()
         return HttpResponse('')
