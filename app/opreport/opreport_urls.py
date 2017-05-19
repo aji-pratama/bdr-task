@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import project_views, quotation_views
+from .views import project_views, quotation_views, tender_views
 
 app_name = 'opreport'
 
@@ -13,4 +13,9 @@ urlpatterns = [
         url(r'^quotation/$', quotation_views.index_quotation, name='index_quotation'),
         url(r'^input-quotation/$', quotation_views.input_quotation, name='input_quotation'),
         url(r'^delete-quotation-(?P<pk>\d+)$', quotation_views.delete_quotation, name='delete_quotation'),
+
+        # Tender
+        url(r'^tender/$', tender_views.index_tender, name='index_tender'),
+        url(r'^input-tender/$', tender_views.input_tender, name='input_tender'),
+        url(r'^delete-tender-(?P<pk>\d+)$', tender_views.delete_tender, name='delete_tender'),
     ]
