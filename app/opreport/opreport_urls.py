@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import project_views, quotation_views, tender_views, delivery_views
+from .views import project_views, quotation_views, tender_views, delivery_views, ticket_views, cashadv_views
 
 app_name = 'opreport'
 
@@ -23,4 +23,16 @@ urlpatterns = [
         url(r'^delivery/$', delivery_views.index_delivery, name='index_delivery'),
         url(r'^input-delivery/$', delivery_views.input_delivery, name='input_delivery'),
         url(r'^delete-delivery-(?P<pk>\d+)$', delivery_views.delete_delivery, name='delete_delivery'),
+
+        # Cash Advance Ticket Project
+        url(r'^ticket/$', ticket_views.index_ticket, name='index_ticket'),
+        url(r'^input-ticket/$', ticket_views.input_ticket, name='input_ticket'),
+        url(r'^delete-ticket-(?P<pk>\d+)$', ticket_views.delete_ticket, name='delete_ticket'),
+
+        # Cash Advance Cashadv Project
+        url(r'^cashadv/$', cashadv_views.index_cashadv, name='index_cashadv'),
+        url(r'^input-cashadv/$', cashadv_views.input_cashadv, name='input_cashadv'),
+        url(r'^delete-cashadv-(?P<pk>\d+)$', cashadv_views.delete_cashadv, name='delete_cashadv'),
+
+
     ]

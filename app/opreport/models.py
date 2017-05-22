@@ -2,6 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+OM_CHOICES = (
+    ('east', 'East'),
+    ('west', 'West'),
+)
+
 class Project(models.Model):
     OM_CHOICES = (
         ('east', 'East'),
@@ -87,7 +92,45 @@ class Delivery(models.Model):
     def __unicode__(self):
 		return self.job_no
 
+class Ticket(models.Model):
+    OM_CHOICES = (
+        ('east', 'East'),
+        ('west', 'West'),
+    )
 
+    date_flight = models.CharField(max_length=150)
+    om = models.CharField(max_length=20, choices=OM_CHOICES)
+    name = models.CharField(max_length=150)
+    customer = models.CharField(max_length=150)
+    id_jobno = models.CharField(max_length=150)
+    purpose = models.CharField(max_length=150)
+    cost = models.CharField(max_length=150)
+    payment = models.CharField( max_length=150)
+
+    def __unicode__(self):
+		return self.date_flight
+
+class Cashadv(models.Model):
+    date_request = models.DateField()
+    om = models.CharField(max_length=20, choices=OM_CHOICES)
+    name_of_payee = models.CharField(max_length=100)
+    customer = models.CharField(max_length=100)
+    id_jobno = models.CharField(max_length=100)
+    purpose = models.CharField(max_length=100)
+    car = models.CharField(max_length=100)
+    pi = models.CharField(max_length=100)
+    actual_cost = models.CharField(max_length=100)
+    receive_payment = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+
+    def __unicode__(self):
+		return self.purpose
+# Budgeting terakhir cz rada ribet
+# class Budgetingdata(models.Model):
+#     location = CharField(max_length=100)
+#     coa = CharField(max_length=100)
+#     deskripsi = CharField(max_length=100)
+#
 
 
 

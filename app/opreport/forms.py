@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Quotation, Tender, Delivery
+from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, ButtonHolder, Submit, Div
 
@@ -127,9 +127,61 @@ class DeliveryForm(forms.ModelForm):
             ),
         )
 
+# CASH ADV
+class TicketForm(forms.ModelForm):
+    class Meta:
 
+        model = Ticket
+        fields = ('date_flight','om','name','customer','id_jobno','purpose','cost','payment')
 
+    def __init__(self, *args, **kwargs):
+        super(TicketForm, self).__init__(*args, **kwargs)
 
+        self.helper = FormHelper()
+        self.helper.form_id = 'id_ticket_form'
+        self.helper.form_method = 'POST'
+        self.helper.form_tag = True
+        self.helper.layout = Layout(
+            Div(
+                Div('date_flight','om','name','customer',
+                     css_class='col-md-6'),
+
+                Div('id_jobno','purpose','cost','payment',
+                    Div(
+                        Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
+                    ),
+                     css_class='col-md-6'),
+                css_class='row'
+            ),
+        )
+
+# Cashadv
+class CashadvForm(forms.ModelForm):
+    class Meta:
+
+        model = Cashadv
+        fields = ('date_request','om','name_of_payee','customer','id_jobno','purpose','car','pi','actual_cost','receive_payment','status')
+
+    def __init__(self, *args, **kwargs):
+        super(CashadvForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_id = 'id_cashadv_form'
+        self.helper.form_method = 'POST'
+        self.helper.form_tag = True
+        self.helper.layout = Layout(
+            Div(
+                Div('date_request','om','name_of_payee','customer','id_jobno',
+                     css_class='col-md-6'),
+
+                Div('purpose','car','pi','actual_cost','receive_payment','status',
+                    Div(
+                        Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
+                    ),
+                     css_class='col-md-6'),
+                css_class='row'
+            ),
+        )
 
 
 

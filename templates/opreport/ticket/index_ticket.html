@@ -1,0 +1,115 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+
+{# BLOCK MAIN Content #}
+{% block content %}
+{% include "opreport/ticket/modal_input_ticket.html" %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> Tender</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="x_content">
+    <div class="table-responsive">
+      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Delivery Data</button>
+      <div class="form-group">
+        <form class="form-inline" action="{% url 'opreport:index_ticket' %}" method="POST">{% csrf_token %}
+          <input class="form-control" name="q" type="text" placeholder="Search">
+          <input type="submit" name="search" value="Search" class="btn btn-primary btn-sm">
+        </form>
+      </div>
+      <table class="table table-bordered jambo_table">
+        <thead class="heading">
+          <tr>
+            <th class="column-title" style="text-align: center">No</th>
+            <th class="column-title" style="text-align: center">Date Flight</th>
+            <th class="column-title" style="text-align: center">OM</th>
+            <th class="column-title" style="text-align: center">Name</th>
+            <th class="column-title" style="text-align: center">Customer</th>
+            <th class="column-title" style="text-align: center">ID Job No</th>
+            <th class="column-title" style="text-align: center">Purpose</th>
+            <th class="column-title" style="text-align: center">Cost</th>
+            <th class="column-title" style="text-align: center">Payment</th>
+            <th class="column-title" style="text-align: center"><span class="nobr">Action</span>
+            </th>
+            <th class="bulk-actions" colspan="7">
+              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% if tickets %}
+          {% for ticket in tickets %}
+          <tr class="even pointer">
+            <td>{{  forloop.counter0|add:tickets.start_index }} </td>
+            <td class="">{{ ticket.date_flight }}</td>
+            <td class="">{{ ticket.om }}</td>
+            <td class="">{{ ticket.name }}</td>
+            <td class="">{{ ticket.customer }}</td>
+            <td class="">{{ ticket.id_jobno }}</td>
+            <td class="">{{ ticket.purpose_cost }}</td>
+            <td class="">{{ ticket.payment }}</td>
+            <td class="">{{ ticket.insert_data }}</td>
+            <td class="">
+              <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+              <a id="confirm-delete" href="{% url 'opreport:delete_ticket' ticket.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+
+          {% else %}
+          <tr>
+            <td colspan="15" style="text-align: center">Data Kosong</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      {% if tickets.has_other_pages %}
+      <ul class="pagination">
+        {% if tickets.has_previous %}
+        <li><a href="?page={{ tickets.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in tickets.paginator.page_range %}
+        {% if tickets.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if tickets.has_next %}
+        <li><a href="?page={{ tickets.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+
+
+  </div>
+</div>
+</div>
+{% endblock %}
+
+
+{# BLOCK javascript #}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '#confirm-delete', function(){
+      return confirm('Apakah anda yakin akan menghapus ini?');
+  });
+});
+</script>
+{% endblock %}
