@@ -1,0 +1,107 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+
+{# BLOCK MAIN Content #}
+{% block content %}
+{% include "opreport/budgeting/modal_input_budgetingdata.html" %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2> Tender</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="x_content">
+    <div class="table-responsive">
+      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Budgeting Data</button>
+      <div class="form-group">
+        <form class="form-inline" action="{% url 'opreport:index_project' %}" method="POST">{% csrf_token %}
+          <input class="form-control" name="q" type="text" placeholder="Search">
+          <input type="submit" name="search" value="Search" class="btn btn-primary btn-sm">
+        </form>
+      </div>
+      <table class="table table-bordered jambo_table">
+        <thead class="heading">
+          <tr>
+            <th class="column-title" style="text-align: center">NO</th>
+            <th class="column-title" style="text-align: center">Location</th>
+            <th class="column-title" style="text-align: center">Coa</th>
+            <th class="column-title" style="text-align: center">Deskripsi</th>
+            </th>
+            <th class="column-title" style="text-align: center"><span class="nobr">Action</span>
+            </th>
+            <th class="bulk-actions" colspan="7">
+              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% if budgetingdatas %}
+          {% for budgetingdata in budgetingdatas %}
+
+          <tr class="even pointer">
+            <td>{{  forloop.counter0|add:budgetingdatas.start_index }} </td>
+            <td class="">{{ budgetingdata.location }}</td>
+            <td class="">{{ budgetingdata.coa }}</td>
+            <td class="">{{ budgetingdata.deskripsi }}</td>
+            <td class="">
+              <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+              <a id="confirm-delete" href="{% url 'opreport:delete_budgetingdata' budgetingdata.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+
+          {% else %}
+          <tr>
+            <td colspan="15" style="text-align: center">Data Kosong</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      {% if budgetingdatas.has_other_pages %}
+      <ul class="pagination">
+        {% if budgetingdatas.has_previous %}
+        <li><a href="?page={{ budgetingdatas.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in budgetingdatas.paginator.page_range %}
+        {% if budgetingdatas.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if budgetingdatas.has_next %}
+        <li><a href="?page={{ budgetingdatas.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+
+
+  </div>
+</div>
+</div>
+{% endblock %}
+
+
+{# BLOCK javascript #}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '#confirm-delete', function(){
+      return confirm('Apakah anda yakin akan menghapus ini?');
+  });
+});
+</script>
+{% endblock %}

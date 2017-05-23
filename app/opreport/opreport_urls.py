@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import project_views, quotation_views, tender_views, delivery_views, ticket_views, cashadv_views
+from .views import project_views, quotation_views, tender_views, delivery_views, ticket_views, cashadv_views, budgeting_views
 
 app_name = 'opreport'
 
@@ -34,5 +34,8 @@ urlpatterns = [
         url(r'^input-cashadv/$', cashadv_views.input_cashadv, name='input_cashadv'),
         url(r'^delete-cashadv-(?P<pk>\d+)$', cashadv_views.delete_cashadv, name='delete_cashadv'),
 
-
+        # BUDGETING
+        url(r'^budgeting/$', budgeting_views.index_budgeting, name='index_budgeting'),
+        url(r'^input-budgeting/$', budgeting_views.input_budgetingdata, name='input_budgetingdata'),
+        url(r'^delete-budgeting-(?P<pk>\d+)$', budgeting_views.delete_budgetingdata, name='delete_budgetingdata'),
     ]
