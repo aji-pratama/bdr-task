@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv
+from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv, Budgetingdata, BudgetingRealisasi
 from django.contrib import admin
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -27,5 +27,5 @@ admin.site.register(Tender, TenderAdmin)
 #Admin Delivery
 admin.site.register(Delivery)#, DeliveryAdmin)
 admin.site.register(Ticket)#, DeliveryAdmin)
-# admin.site.register(Delivery)#, DeliveryAdmin)
 admin.site.register(Cashadv)#, DeliveryAdmin)
+admin.site.register([Budgetingdata, BudgetingRealisasi])#, DeliveryAdmin)

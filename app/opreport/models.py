@@ -125,12 +125,36 @@ class Cashadv(models.Model):
 
     def __unicode__(self):
 		return self.purpose
+
 # Budgeting terakhir cz rada ribet
-# class Budgetingdata(models.Model):
-#     location = CharField(max_length=100)
-#     coa = CharField(max_length=100)
-#     deskripsi = CharField(max_length=100)
-#
+class Budgetingdata(models.Model):
+    location = models.CharField(max_length=100)
+    coa = models.CharField(max_length=100)
+    deskripsi = models.CharField(max_length=100)
+
+    def __unicode__(self):
+		return self.deskripsi
+
+class BudgetingRealisasi(models.Model):
+    MONTH_CHOICES = (
+        ('januari', 'Januari'),
+        ('februari', 'Februari'),
+        ('maret', 'Maret'),
+        ('april', 'April'),
+        ('mei', 'Mei'),
+        ('juni', 'Juni'),
+        ('juli', 'Juli'),
+        ('agustus', 'Agustus'),
+        ('september', 'September'),
+        ('oktober', 'Oktober'),
+        ('november', 'November'),
+        ('desember', 'Desember'),
+    )
+
+    deskripsi = models.ForeignKey(Budgetingdata, on_delete=models.CASCADE)
+    month = models.CharField(max_length=100, choices=MONTH_CHOICES)
+    budgeting = models.CharField(max_length=100)
+    realisasi = models.CharField(max_length=100)
 
 
 
