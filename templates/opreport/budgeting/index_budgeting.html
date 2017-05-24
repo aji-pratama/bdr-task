@@ -1,9 +1,8 @@
 {% extends "base/main_base.html" %}
-{% load crispy_forms_tags %}
 
 {# BLOCK MAIN Content #}
 {% block content %}
-{% include "opreport/budgeting/modal_input_budgetingdata.html" %}
+{# {% include "opreport/budgeting/modal_input_budgetingdata.html" %}#}
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
@@ -20,10 +19,6 @@
     <div class="table-responsive">
       <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Budgeting Data</button>
       <div class="form-group">
-        <form class="form-inline" action="{% url 'opreport:index_project' %}" method="POST">{% csrf_token %}
-          <input class="form-control" name="q" type="text" placeholder="Search">
-          <input type="submit" name="search" value="Search" class="btn btn-primary btn-sm">
-        </form>
       </div>
       <table class="table table-bordered jambo_table">
         <thead class="heading">
@@ -42,18 +37,18 @@
         </thead>
 
         <tbody>
-          {% if budgetingdatas %}
-          {% for budgetingdata in budgetingdatas %}
+          {% if budgetings %}
+          {% for budgeting in budgetings %}
 
           <tr class="even pointer">
-            <td>{{  forloop.counter0|add:budgetingdatas.start_index }} </td>
-            <td class="">{{ budgetingdata.location }}</td>
-            <td class="">{{ budgetingdata.coa }}</td>
-            <td class="">{{ budgetingdata.deskripsi }}</td>
+            <td>{{  forloop.counter0|add:budgetings.start_index }} </td>
+            <td class="">{{ budgeting.location }}</td>
+            <td class="">{{ budgeting.coa }}</td>
+            <td class="">{{ budgeting.deskripsi }}</td>
             <td class="">
-              <a href="{% url 'opreport:budgeting_realisasi' budgetingdata.id %}" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
+              <a href="" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
               <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
-              <a id="confirm-delete" href="{% url 'opreport:delete_budgetingdata' budgetingdata.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+              <a id="confirm-delete" href="" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -66,22 +61,22 @@
         </tbody>
       </table>
 
-      {% if budgetingdatas.has_other_pages %}
+      {% if budgetings.has_other_pages %}
       <ul class="pagination">
-        {% if budgetingdatas.has_previous %}
-        <li><a href="?page={{ budgetingdatas.previous_page_number }}">&laquo;</a></li>
+        {% if budgetings.has_previous %}
+        <li><a href="?page={{ budgetings.previous_page_number }}">&laquo;</a></li>
         {% else %}
         <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
-        {% for i in budgetingdatas.paginator.page_range %}
-        {% if budgetingdatas.number == i %}
+        {% for i in budgetings.paginator.page_range %}
+        {% if budgetings.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
         <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
-        {% if budgetingdatas.has_next %}
-        <li><a href="?page={{ budgetingdatas.next_page_number }}">&raquo;</a></li>
+        {% if budgetings.has_next %}
+        <li><a href="?page={{ budgetings.next_page_number }}">&raquo;</a></li>
         {% else %}
         <li class="disabled"><span>&raquo;</span></li>
         {% endif %}

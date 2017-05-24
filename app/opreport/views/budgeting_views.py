@@ -1,54 +1,44 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from app.opreport.models import Budgetingdata, BudgetingRealisasi
-from app.opreport.forms import BudgetingdataForm
+from app.opreport.models import BudgetingRealisasi
+# from app.opreport.forms import BudgetingdataForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index_budgeting(request):
     try:
-        form = BudgetingdataForm()
-        budgetingdata_list = Budgetingdata.objects.all()
-        # if request.POST:
-        #     q = request.POST.get('q')
-        #     budgetingdata_list = Budgetingdata.objects.filter(budgetingdata_name__contains=q)
+        # form = BudgetingdataForm()
+        budgeting_list = BudgetingRealisasi.objects.all()
 
-        paginator = Paginator(budgetingdata_list, 5) # Show 25 contacts per page
+        paginator = Paginator(budgeting_list, 5)
 
         page = request.GET.get('page')
         try:
-            budgetingdatas = paginator.page(page)
+            budgetings = paginator.page(page)
         except PageNotAnInteger:
-            budgetingdatas = paginator.page(1)
+            budgetings = paginator.page(1)
         except EmptyPage:
-            budgetingdatas = paginator.page(paginator.num_pages)
+            budgetings = paginator.page(paginator.num_pages)
 
-    except Budgetingdata.DoesNotExist:
-        raise Http404("Budgetingdata Does Not Exist")
-    return render(request, 'opreport/budgeting/index_budgeting.html', {'budgetingdatas': budgetingdatas, 'form': form})
+    except BudgetingRealisasi.DoesNotExist:
+        raise Http404("BudgetingRealisasi Does Not Exist")
+    return render(request, 'opreport/budgeting/index_budgeting.html', {'budgetings': budgetings})
 
-def input_budgetingdata(request):
+def input_budgeting(request):
     if request.POST:
         location = request.POST.get('location')
         coa = request.POST.get('coa')
         deskripsi = request.POST.get('deskripsi')
-        insert_data = Budgetingdata(location=location,coa=coa,deskripsi=deskripsi)
+        insert_data = BudgetingRealisasi(location=location,coa=coa,deskripsi=deskripsi,)
         insert_data.save()
         return HttpResponse('')
 
-def delete_budgetingdata(request, pk):
-    budgetingdata = Budgetingdata.objects.get(id=pk)
-    budgetingdata.delete()
+def delete_budgeting(request, pk):
+    budgeting = BudgetingRealisasi.objects.get(id=pk)
+    budgeting.delete()
 
     return HttpResponseRedirect('/operation-report/budgeting/')
-
-def budgeting_realisasi(request, pk):
-    budgetingdata = Budgetingdata.objects.get(id=pk)
-    
-    return render(request, 'opreport/budgeting/budgeting_realisasi.html', {'budgetingdata': budgetingdata})
-
-
 
 
 

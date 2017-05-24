@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv, Budgetingdata, Budgetingdata
+from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv, BudgetingRealisasi
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, ButtonHolder, Submit, Div
 
@@ -183,23 +183,26 @@ class CashadvForm(forms.ModelForm):
             ),
         )
 
-# Budgetingdata
-class BudgetingdataForm(forms.ModelForm):
+# BudgetingRealisasi
+class BudgetingRealisasiForm(forms.ModelForm):
     class Meta:
 
-        model = Budgetingdata
-        fields = ('location','coa','deskripsi')
+        model = BudgetingRealisasi
+        fields = ('date_request','om','name_of_payee','customer','id_jobno','purpose','car','pi','actual_cost','receive_payment','status')
 
     def __init__(self, *args, **kwargs):
-        super(BudgetingdataForm, self).__init__(*args, **kwargs)
+        super(BudgetingRealisasiForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
-        self.helper.form_id = 'id_budgetingdata_form'
+        self.helper.form_id = 'id_budgeting_form'
         self.helper.form_method = 'POST'
         self.helper.form_tag = True
         self.helper.layout = Layout(
             Div(
-                Div('location','coa','deskripsi',
+                Div('date_request','om','name_of_payee','customer','id_jobno',
+                     css_class='col-md-6'),
+
+                Div('purpose','car','pi','actual_cost','receive_payment','status',
                     Div(
                         Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
                     ),
@@ -207,9 +210,6 @@ class BudgetingdataForm(forms.ModelForm):
                 css_class='row'
             ),
         )
-
-
-
 
 
 

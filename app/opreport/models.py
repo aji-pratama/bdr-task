@@ -104,7 +104,7 @@ class Cashadv(models.Model):
 		return self.purpose
 
 # Budgeting terakhir cz rada ribet
-class Budgetingdata(models.Model):
+class BudgetingRealisasi(models.Model):
     LOCATION_CHOICE = (
         ('kendari','Kendari'),
         ('teluk_sirih','Teluk SIrih'),
@@ -113,34 +113,34 @@ class Budgetingdata(models.Model):
     location = models.CharField(max_length=100)
     coa = models.CharField(max_length=100)
     deskripsi = models.CharField(max_length=100)
+    #Budgeting Realisasi
+    januari_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    januari_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    februari_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    februari_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    maret_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    maret_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    april_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    april_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    mei_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    mei_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    juni_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    juni_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    juli_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    juli_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    agustus_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    agustus_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    september_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    september_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    oktober_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    oktober_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    november_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    november_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    desember_budgeting = models.DecimalField(decimal_places=2, max_digits=12, default=0)
+    desember_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
 
     def __unicode__(self):
 		return self.deskripsi
-
-class BudgetingRealisasi(models.Model):
-    MONTH_CHOICES = (
-        ('januari', 'Januari'),
-        ('februari', 'Februari'),
-        ('maret', 'Maret'),
-        ('april', 'April'),
-        ('mei', 'Mei'),
-        ('juni', 'Juni'),
-        ('juli', 'Juli'),
-        ('agustus', 'Agustus'),
-        ('september', 'September'),
-        ('oktober', 'Oktober'),
-        ('november', 'November'),
-        ('desember', 'Desember'),
-    )
-
-    deskripsi = models.ForeignKey(Budgetingdata, on_delete=models.CASCADE)
-    month = models.CharField(max_length=100, choices=MONTH_CHOICES)
-    budgeting = models.CharField(max_length=100)
-    realisasi = models.CharField(max_length=100)
-
-    def __unicode__(self):
-		return self.month
-
 
 
 
