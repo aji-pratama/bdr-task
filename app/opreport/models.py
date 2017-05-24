@@ -139,7 +139,7 @@ class BudgetingRealisasi(models.Model):
     realisasi = models.CharField(max_length=100)
 
     def __unicode__(self):
-		return self.deskripsi
+		return self.month
 
 
 

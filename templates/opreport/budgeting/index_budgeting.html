@@ -7,7 +7,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2> Tender</h2>
+      <h2> Budgeting & Realisasi</h2>
       <ul class="nav navbar-right panel_toolbox">
         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
@@ -51,6 +51,7 @@
             <td class="">{{ budgetingdata.coa }}</td>
             <td class="">{{ budgetingdata.deskripsi }}</td>
             <td class="">
+              <a href="{% url 'opreport:budgeting_realisasi' budgetingdata.id %}" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
               <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
               <a id="confirm-delete" href="{% url 'opreport:delete_budgetingdata' budgetingdata.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
             </td>

@@ -38,4 +38,5 @@ urlpatterns = [
         url(r'^budgeting/$', budgeting_views.index_budgeting, name='index_budgeting'),
         url(r'^input-budgeting/$', budgeting_views.input_budgetingdata, name='input_budgetingdata'),
         url(r'^delete-budgeting-(?P<pk>\d+)$', budgeting_views.delete_budgetingdata, name='delete_budgetingdata'),
+        url(r'^budgeting-realisasi-(?P<pk>\d+)$', budgeting_views.budgeting_realisasi, name='budgeting_realisasi'),
     ]

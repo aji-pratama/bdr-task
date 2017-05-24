@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from app.opreport.models import Budgetingdata
+from app.opreport.models import Budgetingdata, BudgetingRealisasi
 from app.opreport.forms import BudgetingdataForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -30,9 +30,9 @@ def index_budgeting(request):
 
 def input_budgetingdata(request):
     if request.POST:
-        location = request.get('location')
-        coa = request.get('coa')
-        deskripsi = request.get('deskripsi')
+        location = request.POST.get('location')
+        coa = request.POST.get('coa')
+        deskripsi = request.POST.get('deskripsi')
         insert_data = Budgetingdata(location=location,coa=coa,deskripsi=deskripsi)
         insert_data.save()
         return HttpResponse('')
@@ -43,7 +43,10 @@ def delete_budgetingdata(request, pk):
 
     return HttpResponseRedirect('/operation-report/budgeting/')
 
-
+def budgeting_realisasi(request, pk):
+    budgetingdata = Budgetingdata.objects.get(id=pk)
+    
+    return render(request, 'opreport/budgeting/budgeting_realisasi.html', {'budgetingdata': budgetingdata})
 
 
 
