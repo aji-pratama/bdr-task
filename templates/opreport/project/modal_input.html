@@ -22,8 +22,8 @@
 
 {# BLOCK javascript #}
 <script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
-{% block javascript %}
-  <script type="text/javascript">
+<script src="{% static '/js/jquery.validate.js' %}"></script>
+  <script>
     $(document).ready(function() {
       $(document).on('submit','#id_project_form', function(e){
         e.preventDefault();
@@ -50,18 +50,6 @@
           success:function(data){
             $('#myModal').modal('hide');
             location.reload();
-            om: $('#id_om').val('');
-            location: $('#id_location').val('');
-            job_no: $('#id_job_no').val('');
-            project_name: $('#id_project_name').val('');
-            spk_no: $('#id_spk_no').val('');
-            value: $('#id_value').val('');
-            statuspr_material: $('#id_statuspr_material').val('');
-            statuspr_fabrication: $('#id_statuspr_fabrication').val('');
-            statuspr_installation: $('#id_statuspr_installation').val('');
-            invoice_tahap1: $('#id_invoice_tahap1').val('');
-            invoice_tahap2: $('#id_invoice_tahap2').val('');
-            invoice_tahap3: $('#id_invoice_tahap3').val('');
             $('#myModal').modal('hide');
           }
 
@@ -70,4 +58,3 @@
       });
     });
   </script>
-{% endblock %}
