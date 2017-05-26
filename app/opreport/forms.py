@@ -183,12 +183,13 @@ class CashadvForm(forms.ModelForm):
             ),
         )
 
+
 # BudgetingRealisasi
 class BudgetingRealisasiForm(forms.ModelForm):
     class Meta:
 
         model = BudgetingRealisasi
-        fields = ('date_request','om','name_of_payee','customer','id_jobno','purpose','car','pi','actual_cost','receive_payment','status')
+        fields = ('location','coa','deskripsi')
 
     def __init__(self, *args, **kwargs):
         super(BudgetingRealisasiForm, self).__init__(*args, **kwargs)
@@ -199,18 +200,14 @@ class BudgetingRealisasiForm(forms.ModelForm):
         self.helper.form_tag = True
         self.helper.layout = Layout(
             Div(
-                Div('date_request','om','name_of_payee','customer','id_jobno',
-                     css_class='col-md-6'),
-
-                Div('purpose','car','pi','actual_cost','receive_payment','status',
+                Div('location','coa','deskripsi',
                     Div(
                         Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
                     ),
-                     css_class='col-md-6'),
+                     css_class='col-md-12'),
                 css_class='row'
             ),
         )
-
 
 
 

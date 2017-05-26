@@ -2,91 +2,148 @@
 
 {# BLOCK MAIN Content #}
 {% block content %}
-{# {% include "opreport/budgeting/modal_input_budgetingdata.html" %}#}
+{% include "opreport/budgeting/modal_input_budgeting.html" %}
+
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
       <h2> Budgeting & Realisasi</h2>
       <ul class="nav navbar-right panel_toolbox">
-        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-        </li>
-      </li>
-    </ul>
-    <div class="clearfix"></div>
-  </div>
-
-  <div class="x_content">
-    <div class="table-responsive">
-      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Budgeting Data</button>
-      <div class="form-group">
-      </div>
-      <table class="table table-bordered jambo_table">
-        <thead class="heading">
-          <tr>
-            <th class="column-title" style="text-align: center">NO</th>
-            <th class="column-title" style="text-align: center">Location</th>
-            <th class="column-title" style="text-align: center">Coa</th>
-            <th class="column-title" style="text-align: center">Deskripsi</th>
-            </th>
-            <th class="column-title" style="text-align: center"><span class="nobr">Action</span>
-            </th>
-            <th class="bulk-actions" colspan="7">
-              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% if budgetings %}
-          {% for budgeting in budgetings %}
-
-          <tr class="even pointer">
-            <td>{{  forloop.counter0|add:budgetings.start_index }} </td>
-            <td class="">{{ budgeting.location }}</td>
-            <td class="">{{ budgeting.coa }}</td>
-            <td class="">{{ budgeting.deskripsi }}</td>
-            <td class="">
-              <a href="" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
-              <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
-              <a id="confirm-delete" href="" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          {% endfor %}
-
-          {% else %}
-          <tr>
-            <td colspan="15" style="text-align: center">Data Kosong</td>
-          </tr>
-          {% endif %}
-        </tbody>
-      </table>
-
-      {% if budgetings.has_other_pages %}
-      <ul class="pagination">
-        {% if budgetings.has_previous %}
-        <li><a href="?page={{ budgetings.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-        <li class="disabled"><span>&laquo;</span></li>
-        {% endif %}
-        {% for i in budgetings.paginator.page_range %}
-        {% if budgetings.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-        {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-        {% endfor %}
-        {% if budgetings.has_next %}
-        <li><a href="?page={{ budgetings.next_page_number }}">&raquo;</a></li>
-        {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
       </ul>
-      {% endif %}
+      <div class="clearfix"></div>
     </div>
 
+    <div class="x_content col-md-6">
+      <div class="table-responsive">
+        <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Budgeting Data</button>
+        <hr>
 
+        {# KENDARI #}
+        <div class="">
+          <h2>KENDARI</h2>
+          <table class="table table-bordered jambo_table">
+            <thead class="heading">
+              <tr>
+                <th class="column-title" style="text-align: center">NO</th>
+                <th class="column-title" style="text-align: center">Coa</th>
+                <th class="column-title" style="text-align: center">Deskripsi</th>
+                <th class="column-title" style="text-align: center"><span class="nobr">Action</span></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% if budgetings_kendari %}
+              {% for budgeting in budgetings_kendari %}
+
+              <tr class="even pointer">
+                <td>{{  forloop.counter0|add:budgetings_kendari.start_index }} </td>
+                <td class="">{{ budgeting.coa }}</td>
+                <td class="">{{ budgeting.deskripsi }}</td>
+                <td class="">
+                  <a href="" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+                  <a id="confirm-delete" href="{% url 'opreport:delete_budgeting' budgeting.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% else %}
+              <tr>
+                <td colspan="15" style="text-align: center">Data Kosong</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+
+          {% if budgetings_kendari.has_other_pages %}
+          <ul class="pagination">
+            {% if budgetings_kendari.has_previous %}
+            <li><a href="?page={{ budgetings_kendari.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in budgetings_kendari.paginator.page_range %}
+            {% if budgetings_kendari.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if budgetings_kendari.has_next %}
+            <li><a href="?page={{ budgetings_kendari.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+
+        <hr>
+
+        {# TELUK SIRIH #}
+        <div class="">
+          <h2>TELUK SIRIH</h2>
+          <table class="table table-bordered jambo_table">
+            <thead class="heading">
+              <tr>
+                <th class="column-title" style="text-align: center">NO</th>
+                <th class="column-title" style="text-align: center">Coa</th>
+                <th class="column-title" style="text-align: center">Deskripsi</th>
+                <th class="column-title" style="text-align: center"><span class="nobr">Action</span></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% if budgetings_ts %}
+              {% for budgeting in budgetings_ts %}
+
+              <tr class="even pointer">
+                <td>{{  forloop.counter0|add:budgetings_ts.start_index }} </td>
+                <td class="">{{ budgeting.coa }}</td>
+                <td class="">{{ budgeting.deskripsi }}</td>
+                <td class="">
+                  <a href="" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+                  <a id="confirm-delete" href="{% url 'opreport:delete_budgeting' budgeting.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% else %}
+              <tr>
+                <td colspan="15" style="text-align: center">Data Kosong</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+
+          {% if budgetings_ts.has_other_pages %}
+          <ul class="pagination">
+            {% if budgetings_ts.has_previous %}
+            <li><a href="?pagets={{ budgetings_ts.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in budgetings_ts.paginator.page_range %}
+            {% if budgetings_ts.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?pagets={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if budgetings_ts.has_next %}
+            <li><a href="?pagets={{ budgetings_ts.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
   </div>
-</div>
 </div>
 {% endblock %}
 
@@ -96,7 +153,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $(document).on('click', '#confirm-delete', function(){
-      return confirm('Apakah anda yakin akan menghapus ini?');
+    return confirm('Apakah anda yakin akan menghapus ini?');
   });
 });
 </script>

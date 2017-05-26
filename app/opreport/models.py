@@ -105,12 +105,12 @@ class Cashadv(models.Model):
 
 # Budgeting terakhir cz rada ribet
 class BudgetingRealisasi(models.Model):
-    LOCATION_CHOICE = (
-        ('kendari','Kendari'),
-        ('teluk_sirih','Teluk SIrih'),
+    LOCATION_CHOICES = (
+        ('Kendari','Kendari'),
+        ('Teluk Sirih','Teluk Sirih'),
     )
 
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     coa = models.CharField(max_length=100)
     deskripsi = models.CharField(max_length=100)
     #Budgeting Realisasi

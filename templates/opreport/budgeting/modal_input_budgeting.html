@@ -25,12 +25,12 @@
 {% block javascript %}
   <script type="text/javascript">
     $(document).ready(function() {
-      $(document).on('submit','#id_budgetingdata_form', function(e){
+      $(document).on('submit','#id_budgeting_form', function(e){
         e.preventDefault();
 
         $.ajax({
           type: 'POST',
-          url: '{% url "opreport:input_budgetingdata" %}',
+          url: '{% url "opreport:input_budgeting" %}',
           data: {
             location: $('#id_location').val(),
             coa: $('#id_coa').val(),

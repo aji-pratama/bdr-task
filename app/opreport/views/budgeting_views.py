@@ -2,28 +2,36 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from app.opreport.models import BudgetingRealisasi
-# from app.opreport.forms import BudgetingdataForm
+from app.opreport.forms import BudgetingRealisasiForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index_budgeting(request):
     try:
-        # form = BudgetingdataForm()
-        budgeting_list = BudgetingRealisasi.objects.all()
+        form = BudgetingRealisasiForm()
+        budgeting_kendari_list = BudgetingRealisasi.objects.filter(location="Kendari")
+        budgeting_ts_list = BudgetingRealisasi.objects.filter(location="Teluk Sirih")
 
-        paginator = Paginator(budgeting_list, 5)
+        paginator_kendari = Paginator(budgeting_kendari_list, 5)
+        paginator_ts = Paginator(budgeting_ts_list, 5)
 
-        page = request.GET.get('page')
+
+        page_kendari = request.GET.get('page')
+        page_ts = request.GET.get('pagets')
+
         try:
-            budgetings = paginator.page(page)
+            budgetings_kendari = paginator_kendari.page(page_kendari)
+            budgetings_ts = paginator_ts.page(page_ts)
         except PageNotAnInteger:
-            budgetings = paginator.page(1)
+            budgetings_kendari = paginator_kendari.page(1)
+            budgetings_ts = paginator_ts.page(1)
         except EmptyPage:
-            budgetings = paginator.page(paginator.num_pages)
+            budgetings_kendari = paginator_kendari.page(paginator_kendari.num_pages)
+            budgetings_ts = paginator_ts.page(paginator_ts.num_pages)
 
     except BudgetingRealisasi.DoesNotExist:
         raise Http404("BudgetingRealisasi Does Not Exist")
-    return render(request, 'opreport/budgeting/index_budgeting.html', {'budgetings': budgetings})
+    return render(request, 'opreport/budgeting/index_budgeting.html', {'budgetings_kendari': budgetings_kendari, 'budgetings_ts':budgetings_ts, 'form':form})
 
 def input_budgeting(request):
     if request.POST:
