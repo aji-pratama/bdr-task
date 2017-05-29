@@ -19,6 +19,7 @@ urlpatterns = [
         # Tender
         url(r'^tender/$', tender_views.index_tender, name='index_tender'),
         url(r'^input-tender/$', tender_views.input_tender, name='input_tender'),
+        url(r'^edit-tender-(?P<pk>\d+)$', tender_views.edit_tender, name='edit_tender'),
         url(r'^delete-tender-(?P<pk>\d+)$', tender_views.delete_tender, name='delete_tender'),
 
         # PI & Delivery

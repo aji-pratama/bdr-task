@@ -1,0 +1,86 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{# BLOCK MAIN Content #}
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+{% block content %}
+<div class="x_panel">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-sm">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="x_title">
+      <h2> Add New Tender</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+        {% crispy form %}
+    </div>
+  </div>
+</div>
+</div>
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/jquery-ui.js' %}"></script>
+<script type="text/javascript">
+$( function() {
+  $('#id_process_registration').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  $('#id_process_aanwizing').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  $('#id_process_openbid').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+});
+</script>
+
+{% endblock %}
+
+{% block 'javascript' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).on('submit','#id_tender_form', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "opreport:input_tender" %}',
+        data: {
+          om: $('#id_om').val(),
+          quotation_no: $('#id_quotation_no').val(),
+          location: $('#id_location').val(),
+          tender_name: $('#id_tender_name').val(),
+          rks_no: $('#id_rks_no').val(),
+          process_registration: $('#id_process_registration').val(),
+          process_aanwizing: $('#id_process_aanwizing').val(),
+          process_openbid: $('#id_process_openbid').val(),
+          addcost_bidbond: $('#id_addcost_bidbond').val(),
+          addcost_reffbank: $('#id_addcost_reffbank').val(),
+          addcost_document: $('#id_addcost_document').val(),
+          remark: $('#id_remark').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+
+        success:function(data){
+          location.reload();
+        }
+
+      });
+
+    });
+  });
+</script>
+{% endblock %}

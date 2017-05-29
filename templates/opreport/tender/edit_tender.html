@@ -1,0 +1,97 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{# BLOCK MAIN Content #}
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+{% block content %}
+<div class="x_panel">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-sm">{{ message }}, kembali ke <a href="{% url 'opreport:index_tender' %}">Quotation List</a></div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="x_title">
+      <h2> Edit Quotation</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+        {% crispy form %}
+    </div>
+  </div>
+</div>
+</div>
+<script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/jquery-ui.js' %}"></script>
+<script type="text/javascript">
+$( function() {
+  $('#id_process_registration').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  $('#id_process_aanwizing').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  $('#id_process_openbid').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+});
+
+  document.getElementById('id_om').value = '{{ tender.om }}';
+  document.getElementById('id_quotation_no').value = '{{ tender.quotation_no }}';
+  document.getElementById('id_location').value = '{{ tender.location }}';
+  document.getElementById('id_tender_name').value = '{{ tender.tender_name }}';
+  document.getElementById('id_rks_no').value = '{{ tender.rks_no }}';
+  document.getElementById('id_process_registration').value = '{{ tender.process_registration }}';
+  document.getElementById('id_process_aanwizing').value = '{{ tender.process_aanwizing }}';
+  document.getElementById('id_process_openbid').value = '{{ tender.process_openbid }}';
+  document.getElementById('id_addcost_bidbond').value = '{{ tender.addcost_bidbond }}';
+  document.getElementById('id_addcost_reffbank').value = '{{ tender.addcost_reffbank }}';
+  document.getElementById('id_addcost_document').value = '{{ tender.addcost_document }}';
+  document.getElementById('id_remark').value = '{{ tender.remark }}';
+</script>
+{% endblock %}
+
+{% block 'javascript' %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('submit','#id_tender_form', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url "opreport:input_tender" %}',
+      data: {
+        om: $('#id_om').val(),
+        quotation_no: $('#id_quotation_no').val(),
+        location: $('#id_location').val(),
+        tender_name: $('#id_tender_name').val(),
+        rks_no: $('#id_rks_no').val(),
+        process_registration: $('#id_process_registration').val(),
+        process_aanwizing: $('#id_process_aanwizing').val(),
+        process_openbid: $('#id_process_openbid').val(),
+        addcost_bidbond: $('#id_addcost_bidbond').val(),
+        addcost_reffbank: $('#id_addcost_reffbank').val(),
+        addcost_document: $('#id_addcost_document').val(),
+        remark: $('#id_remark').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+
+
+      success:function(data){
+        location.reload();
+      }
+
+    });
+
+  });
+});
+</script>
+{% endblock %}
