@@ -57,7 +57,7 @@ $( function() {
 
       $.ajax({
         type: 'POST',
-        url: '{% url "opreport:input_quotation" %}',
+        url: '{% url "opreport:edit_quotation" %}',
         data: {
           tanggal: $('#id_tanggal').val(),
           inquiry_no: $('#id_inquiry_no').val(),

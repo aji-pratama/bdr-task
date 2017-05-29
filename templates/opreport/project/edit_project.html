@@ -58,7 +58,7 @@ alert("hahaha");
 
       $.ajax({
         type: 'POST',
-        url: '{% url "opreport:input_project" %}',
+        url: '{% url "opreport:edit_project" %}',
         data: {
           om: $('#id_om').val(),
           location: $('#id_location').val(),
