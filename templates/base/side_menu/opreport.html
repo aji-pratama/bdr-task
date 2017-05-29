@@ -1,13 +1,20 @@
 <li><a><i class="fa fa-list-alt"></i> Operation Report <span class="fa fa-chevron-down"></span></a>
   <ul class="nav child_menu">
-    {# <li><a>Level One<span class="fa fa-chevron-down"></span></a>#}
+
     <li><a>Project (JOB NO)<span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li class="sub_menu"><a href="{% url 'opreport:index_project' %}">Project List</a></li>
-        <li><a href="{% url 'opreport:input_project' %}">Add New Project</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:input_project' %}">Add New Project</a></li>
       </ul>
     </li>
-    <li><a href="{% url 'opreport:index_quotation' %}">Quotation</a></li>
+
+    <li><a>Quotation<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li class="sub_menu"><a href="{% url 'opreport:index_quotation' %}">Quotation List</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:input_quotation' %}">Add New Quotation</a></li>
+      </ul>
+    </li>
+
     <li><a href="{% url 'opreport:index_tender' %}">Tender</a></li>
     <li><a href="{% url 'opreport:index_delivery' %}">Delivery</a></li>
     <li><a href="{% url 'opreport:index_ticket' %}">Ticket Project</a></li>

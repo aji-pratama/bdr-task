@@ -3,7 +3,6 @@
 
 {# BLOCK MAIN Content #}
 {% block content %}
-{% include "opreport/quotation/modal_input_quo.html" %}
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
@@ -18,13 +17,7 @@
 
   <div class="x_content">
     <div class="table-responsive">
-      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Quotation Data</button>
-      <div class="form-group">
-        <form class="form-inline" action="{% url 'opreport:index_project' %}" method="POST">{% csrf_token %}
-          <input class="form-control" name="q" type="text" placeholder="Search">
-          <input type="submit" name="search" value="Search" class="btn btn-primary btn-sm">
-        </form>
-      </div>
+      <a id="btnt" type="button" class="btn btn-success btn-sm" href="{% url 'opreport:input_quotation' %}">Add Quotation Data</a>
       <table class="table table-bordered jambo_table">
         <thead class="heading">
           <tr>
@@ -62,7 +55,7 @@
             <td class="">{{ quotation.bid_price }}</td>
             <td class="">{{ quotation.status }}</td>
             <td class="">
-              <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+              <a href="{% url 'opreport:edit_quotation' quotation.id %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
               <a id="confirm-delete" href="{% url 'opreport:delete_quotation' quotation.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
@@ -76,22 +69,22 @@
         </tbody>
       </table>
 
-      {% if projects.has_other_pages %}
+      {% if quotations.has_other_pages %}
       <ul class="pagination">
-        {% if projects.has_previous %}
-        <li><a href="?page={{ projects.previous_page_number }}">&laquo;</a></li>
+        {% if quotations.has_previous %}
+        <li><a href="?page={{ quotations.previous_page_number }}">&laquo;</a></li>
         {% else %}
         <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
-        {% for i in projects.paginator.page_range %}
-        {% if projects.number == i %}
+        {% for i in quotations.paginator.page_range %}
+        {% if quotations.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
         <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
-        {% if projects.has_next %}
-        <li><a href="?page={{ projects.next_page_number }}">&raquo;</a></li>
+        {% if quotations.has_next %}
+        <li><a href="?page={{ quotations.next_page_number }}">&raquo;</a></li>
         {% else %}
         <li class="disabled"><span>&raquo;</span></li>
         {% endif %}

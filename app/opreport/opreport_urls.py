@@ -13,6 +13,7 @@ urlpatterns = [
         # Quotation
         url(r'^quotation/$', quotation_views.index_quotation, name='index_quotation'),
         url(r'^input-quotation/$', quotation_views.input_quotation, name='input_quotation'),
+        url(r'^edit-quotation-(?P<pk>\d+)$', quotation_views.edit_quotation, name='edit_quotation'),
         url(r'^delete-quotation-(?P<pk>\d+)$', quotation_views.delete_quotation, name='delete_quotation'),
 
         # Tender
