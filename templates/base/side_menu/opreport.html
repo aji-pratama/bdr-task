@@ -22,7 +22,13 @@
       </ul>
     </li>
 
-    <li><a href="{% url 'opreport:index_delivery' %}">Delivery</a></li>
+    <li><a>Delivery<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li class="sub_menu"><a href="{% url 'opreport:index_delivery' %}">Delivery List</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:input_delivery' %}">Add New Delivery</a></li>
+      </ul>
+    </li>
+
     <li><a href="{% url 'opreport:index_ticket' %}">Ticket Project</a></li>
     <li><a href="{% url 'opreport:index_cashadv' %}">Cash Advance</a></li>
     <li><a href="{% url 'opreport:index_budgeting' %}">Budgeting & Realisas</a></li>

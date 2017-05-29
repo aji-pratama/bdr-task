@@ -1,0 +1,85 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{# BLOCK MAIN Content #}
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+{% block content %}
+<div class="x_panel">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-sm">{{ message }}, kembali ke <a href="{% url 'opreport:index_delivery' %}">Delivery List</a></div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="x_title">
+      <h2> Add New Delivery</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+        {% crispy form %}
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+  document.getElementById('id_om').value = '{{ delivery.om }}';
+  document.getElementById('id_location').value = '{{ delivery.location }}';
+  document.getElementById('id_job_no').value = '{{ delivery.job_no }}';
+  document.getElementById('id_description_material').value = '{{ delivery.description_material }}';
+  document.getElementById('id_vendor').value = '{{ delivery.vendor }}';
+  document.getElementById('id_value_dpp').value = '{{ delivery.value_dpp }}';
+  document.getElementById('id_value_ppn').value = '{{ delivery.value_ppn }}';
+  document.getElementById('id_progress_dono').value = '{{ delivery.progress_dono }}';
+  document.getElementById('id_progress_leadtime').value = '{{ delivery.progress_leadtime }}';
+  document.getElementById('id_progress_pickup').value = '{{ delivery.progress_pickup }}';
+  document.getElementById('id_expedisi').value = '{{ delivery.expedisi }}';
+  document.getElementById('id_order_status').value = '{{ delivery.order_status }}';
+</script>
+
+{% endblock %}
+
+{% block 'javascript' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).on('submit','#id_delivery_form', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "opreport:input_delivery" %}',
+        data: {
+          om: $('#id_om').val(),
+          location: $('#id_location').val(),
+          job_no: $('#id_job_no').val(),
+          description_material: $('#id_description_material').val(),
+          vendor: $('#id_vendor').val(),
+          value_dpp: $('#id_value_dpp').val(),
+          value_ppn: $('#id_value_ppn').val(),
+          progress_dono: $('#id_progress_dono').val(),
+          progress_leadtime: $('#id_progress_leadtime').val(),
+          progress_pickup: $('#id_progress_pickup').val(),
+          expedisi: $('#id_expedisi').val(),
+          order_status: $('#id_order_status').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+        success:function(data){
+          location.reload();
+        }
+
+      });
+
+    });
+  });
+</script>
+
+{% endblock %}

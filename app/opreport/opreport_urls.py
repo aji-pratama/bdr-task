@@ -25,6 +25,7 @@ urlpatterns = [
         # PI & Delivery
         url(r'^delivery/$', delivery_views.index_delivery, name='index_delivery'),
         url(r'^input-delivery/$', delivery_views.input_delivery, name='input_delivery'),
+        url(r'^edit-delivery-(?P<pk>\d+)$', delivery_views.edit_delivery, name='edit_delivery'),
         url(r'^delete-delivery-(?P<pk>\d+)$', delivery_views.delete_delivery, name='delete_delivery'),
 
         # Cash Advance Ticket Project
