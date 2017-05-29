@@ -7,6 +7,7 @@ urlpatterns = [
         # Project Number
         url(r'^project$', project_views.index_project, name='index_project'),
         url(r'^input-project/$', project_views.input_project, name='input_project'),
+        url(r'^edit-project-(?P<pk>\d+)$', project_views.edit_project, name='edit_project'),
         url(r'^delete-project-(?P<pk>\d+)$', project_views.delete_project, name='delete_project'),
 
         # Quotation

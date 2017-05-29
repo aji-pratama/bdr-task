@@ -1,0 +1,88 @@
+{% extends "base/main_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-sm">{{ message }}, kembali ke <a href="{% url 'opreport:index_project' %}">Project List</a></div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="x_title">
+      <h2> Edit Project (JOB NO)</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+        {% crispy form %}
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+// data exis from objects.getByID (Database)
+  document.getElementById('id_om').value = '{{ project.om }}';
+  document.getElementById('id_location').value = '{{ project.location }}';
+  document.getElementById('id_job_no').value = '{{ project.job_no }}';
+  document.getElementById('id_project_name').value = '{{ project.project_name }}';
+  document.getElementById('id_spk_no').value = '{{ project.spk_no }}';
+  document.getElementById('id_value').value = '{{ project.value }}';
+  document.getElementById('id_statuspr_material').value = '{{ project.statuspr_material }}';
+  document.getElementById('id_statuspr_fabrication').value = '{{ project.statuspr_fabrication }}';
+  document.getElementById('id_statuspr_installation').value = '{{ project.statuspr_installation }}';
+  document.getElementById('id_invoice_tahap1').value = '{{ project.invoice_tahap1 }}';
+  document.getElementById('id_invoice_tahap2').value = '{{ project.invoice_tahap2 }}';
+  document.getElementById('id_invoice_tahap3').value = '{{ project.invoice_tahap3 }}';
+  document.getElementById('id_remark').value = '{{ project.remark }}';
+</script>
+{% endblock %}
+
+{% block 'javascript' %}
+<script>
+alert("hahaha");
+  $(document).ready(function() {
+    alert("hahaha");
+    $('#id_location').val('Haha');
+    $('#id_job_no').val('Kampret');
+    $('#id_project_name').val('SHit');
+
+    $(document).on('submit','#id_project_form', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "opreport:input_project" %}',
+        data: {
+          om: $('#id_om').val(),
+          location: $('#id_location').val(),
+          job_no: $('#id_job_no').val(),
+          project_name: $('#id_project_name').val(),
+          spk_no: $('#id_spk_no').val(),
+          value: $('#id_value').val(),
+          statuspr_material: $('#id_statuspr_material').val(),
+          statuspr_fabrication: $('#id_statuspr_fabrication').val(),
+          statuspr_installation: $('#id_statuspr_installation').val(),
+          invoice_tahap1: $('#id_invoice_tahap1').val(),
+          invoice_tahap2: $('#id_invoice_tahap2').val(),
+          invoice_tahap3: $('#id_invoice_tahap3').val(),
+          remark: $('#id_remark').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+        success:function(data){
+          location.reload();
+        }
+
+      });
+
+    });
+  });
+</script>
+{% endblock %}

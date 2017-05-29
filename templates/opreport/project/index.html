@@ -3,7 +3,6 @@
 
 {# BLOCK MAIN Content #}
 {% block content %}
-{% include "opreport/project/modal_input.html" %}
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
@@ -18,13 +17,7 @@
 
   <div class="x_content">
     <div class="table-responsive">
-      <button id="btnt" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Add Project Data</button>
-      <!--<div class="form-group">
-        <form class="form-inline" action="{% url 'opreport:index_project' %}" method="POST">{% csrf_token %}
-          <input class="form-control" name="q" type="text" placeholder="Search">
-          <input type="submit" name="search" value="Search" class="btn btn-primary btn-sm">
-        </form>
-      </div>-->
+      <a id="btnt" type="button" class="btn btn-success btn-sm" href="{% url 'opreport:input_project' %}">Add New Project</a>
       <table class="table table-bordered jambo_table">
         <thead class="heading">
           <tr>
@@ -76,7 +69,7 @@
             <td class="">{{ project.invoice_tahap3 }}</td>
             <td class="">{{ project.remark }}</td>
             <td class="">
-              <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+              <a href="{% url 'opreport:edit_project' project.id %}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
               <a id="confirm-delete" href="{% url 'opreport:delete_project' project.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
