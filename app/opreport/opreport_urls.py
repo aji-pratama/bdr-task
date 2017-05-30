@@ -31,6 +31,7 @@ urlpatterns = [
         # Cash Advance Ticket Project
         url(r'^ticket/$', ticket_views.index_ticket, name='index_ticket'),
         url(r'^input-ticket/$', ticket_views.input_ticket, name='input_ticket'),
+        url(r'^edit-ticket-(?P<pk>\d+)$', ticket_views.edit_ticket, name='edit_ticket'),
         url(r'^delete-ticket-(?P<pk>\d+)$', ticket_views.delete_ticket, name='delete_ticket'),
 
         # Cash Advance Cashadv Project

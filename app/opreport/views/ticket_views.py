@@ -5,16 +5,13 @@ from app.opreport.models import Ticket
 from app.opreport.forms import TicketForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 def index_ticket(request):
     try:
         form = TicketForm()
         ticket_list = Ticket.objects.all()
-        # if request.POST:
-        #     q = request.POST.get('q')
-        #     ticket_list = Ticket.objects.filter(ticket_name__contains=q)
-
-        paginator = Paginator(ticket_list, 5) # Show 25 contacts per page
+        paginator = Paginator(ticket_list, 5)
 
         page = request.GET.get('page')
         try:
@@ -42,7 +39,38 @@ def input_ticket(request):
                     customer=customer, id_jobno=id_jobno,
                     purpose=purpose, cost=cost, payment=payment)
         insert_data.save()
-        return HttpResponse('')
+        messages.add_message(request, messages.INFO, 'Ticket %s telah ditambahkan' % name)
+        return HttpResponseRedirect('/operation-report/input-ticket')
+    form = TicketForm()
+    return render(request, 'opreport/ticket/new_ticket.html', {'form':form})
+
+
+def edit_ticket(request, pk):
+    ticket = Ticket.objects.get(id=pk)
+    form = TicketForm()
+    if request.POST:
+        date_flight = request.POST.get('date_flight')
+        om = request.POST.get('om')
+        name = request.POST.get('name')
+        customer = request.POST.get('customer')
+        id_jobno = request.POST.get('id_jobno')
+        purpose = request.POST.get('purpose')
+        cost = request.POST.get('cost')
+        payment = request.POST.get('payment')
+        ticket.date_flight = date_flight
+        ticket.om = om
+        ticket.name = name
+        ticket.customer = customer
+        ticket.id_jobno = id_jobno
+        ticket.purpose = purpose
+        ticket.cost = cost
+        ticket.payment = payment
+        ticket.save()
+        messages.add_message(request, messages.INFO, 'Ticket %s telah diupdate' % name)
+        return HttpResponseRedirect('/operation-report/edit-ticket-%s' % ticket.id)
+
+    return render(request, 'opreport/ticket/edit_ticket.html', {'form':form, 'ticket':ticket})
+
 
 def delete_ticket(request, pk):
     ticket = Ticket.objects.get(id=pk)

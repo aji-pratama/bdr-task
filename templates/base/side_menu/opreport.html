@@ -29,7 +29,14 @@
       </ul>
     </li>
 
-    <li><a href="{% url 'opreport:index_ticket' %}">Ticket Project</a></li>
+    <li><a>Ticket Project List<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li class="sub_menu"><a href="{% url 'opreport:index_ticket' %}">Ticket Project List</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:input_ticket' %}">Add New Ticket</a></li>
+      </ul>
+    </li>
+
+
     <li><a href="{% url 'opreport:index_cashadv' %}">Cash Advance</a></li>
     <li><a href="{% url 'opreport:index_budgeting' %}">Budgeting & Realisas</a></li>
   </ul>
