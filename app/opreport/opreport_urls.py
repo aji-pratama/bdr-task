@@ -37,6 +37,7 @@ urlpatterns = [
         # Cash Advance Cashadv Project
         url(r'^cashadv/$', cashadv_views.index_cashadv, name='index_cashadv'),
         url(r'^input-cashadv/$', cashadv_views.input_cashadv, name='input_cashadv'),
+        url(r'^edit-cashadv-(?P<pk>\d+)$', cashadv_views.edit_cashadv, name='edit_cashadv'),
         url(r'^delete-cashadv-(?P<pk>\d+)$', cashadv_views.delete_cashadv, name='delete_cashadv'),
 
         # BUDGETING
