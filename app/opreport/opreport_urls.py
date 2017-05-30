@@ -41,8 +41,10 @@ urlpatterns = [
         url(r'^delete-cashadv-(?P<pk>\d+)$', cashadv_views.delete_cashadv, name='delete_cashadv'),
 
         # BUDGETING
-        url(r'^budgeting/$', budgeting_views.index_budgeting, name='index_budgeting'),
+        url(r'^budgeting-kendari/$', budgeting_views.index_budgeting_kendari, name='index_budgeting_kendari'),
+        url(r'^budgeting-teluk-sirih/$', budgeting_views.index_budgeting_ts, name='index_budgeting_ts'),
         url(r'^input-budgeting/$', budgeting_views.input_budgeting, name='input_budgeting'),
+        url(r'^edit-budgeting-(?P<pk>\d+)$', budgeting_views.edit_budgeting, name='edit_budgeting'),
         url(r'^delete-budgeting-(?P<pk>\d+)$', budgeting_views.delete_budgeting, name='delete_budgeting'),
-        # url(r'^budgeting-realisasi-(?P<pk>\d+)$', budgeting_views.budgeting_realisasi, name='budgeting_realisasi'),
+        url(r'^budgeting-realisasi-(?P<pk>\d+)$', budgeting_views.budgeting_realisasi, name='budgeting_realisasi'),
     ]

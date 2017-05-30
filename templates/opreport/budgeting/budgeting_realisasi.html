@@ -6,7 +6,12 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2> Budgeting & Realisasi {{ budgetingdata.deskripsi }}</h2>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-sm">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+      <h2> Budgeting & Realisasi {{ budgeting.deskripsi }}</h2>
       <ul class="nav navbar-right panel_toolbox">
         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
@@ -17,121 +22,187 @@
 
       <table class="table table-bordered jambo_table">
         <thead class="heading">
-          {% for budgeting in budegetingrealisasi %}
-            {{ budgeting.deskripsi }}
-            {{ budgeting.month }}
-            {{ budgeting.realisasi }}
-          {% endfor %}
           <tr>
-            <th class="column-title" style="text-align: center">NO</th>
-            <th class="column-title" style="text-align: center">Month</th>
-            <th class="column-title" style="text-align: center">Budgeting</th>
-            <th class="column-title" style="text-align: center">Realisasi</th>
+            <th class="column-title">NO</th>
+            <th class="column-title">Month</th>
+            <th class="column-title">Budgeting</th>
+            <th class="column-title">Realisasi</th>
           </tr>
         </thead>
 
+        <form id="id_budgeting_realisasi_form" method="post">
+          {% csrf_token %}
         <tbody>
           <tr class="even pointer">
             <td class="">1</td>
             <td class="">Januari</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="januari_budgeting" id="id_januari_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="januari_realisasi" id="id_januari_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">2</td>
             <td class="">Februari</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="februari_budgeting" id="id_februari_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="februari_realisasi" id="id_februari_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">3</td>
             <td class="">Maret</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="maret_budgeting" id="id_maret_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="maret_realisasi" id="id_maret_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">4</td>
             <td class="">April</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="april_budgeting" id="id_april_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="april_realisasi" id="id_april_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">5</td>
             <td class="">Mei</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="mei_budgeting" id="id_mei_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="mei_realisasi" id="id_mei_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">6</td>
             <td class="">Juni</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="juni_budgeting" id="id_juni_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="juni_realisasi" id="id_juni_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">7</td>
             <td class="">Juli</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="juli_budgeting" id="id_juli_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="juli_realisasi" id="id_juli_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">8</td>
             <td class="">Agustus</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="agustus_budgeting" id="id_agustus_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="agustus_realisasi" id="id_agustus_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">9</td>
             <td class="">September</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="september_budgeting" id="id_september_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="september_realisasi" id="id_september_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">10</td>
             <td class="">Oktober</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="oktober_budgeting" id="id_oktober_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="oktober_realisasi" id="id_oktober_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">11</td>
             <td class="">November</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="november_budgeting" id="id_november_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="november_realisasi" id="id_november_realisasi" class="form-control"></td>
           </tr>
 
           <tr class="even pointer">
             <td class="">12</td>
             <td class="">Desember</td>
-            <td class=""></td>
-            <td class=""></td>
+            <td class=""><input type="text" name="desember_budgeting" id="id_desember_budgeting" class="form-control"></td>
+            <td class=""><input type="text" name="desember_realisasi" id="id_desember_realisasi" class="form-control"></td>
           </tr>
-
         </tbody>
+
       </table>
+      {% if budgeting.location == "Teluk Sirih" %}
+      <a href="{% url 'opreport:index_budgeting_ts' %}" class="btn btn-default"><< Back </a>
+      {% elif budgeting.location == "Kendari" %}
+      <a href="{% url 'opreport:index_budgeting_kendari' %}" class="btn btn-default"><< Back </a>
+      {% endif %}
+      <input type="submit" name="submit" value="SAVE" class="btn btn-primary">
+    </form>
     </div>
 
 
   </div>
 </div>
+<script type="text/javascript">
+    document.getElementById('id_januari_budgeting').value = '{{ budgeting.januari_budgeting }}';
+    document.getElementById('id_januari_realisasi').value = '{{ budgeting.januari_realisasi }}';
+    document.getElementById('id_februari_budgeting').value = '{{ budgeting.februari_budgeting }}';
+    document.getElementById('id_februari_realisasi').value = '{{ budgeting.februari_realisasi }}';
+    document.getElementById('id_maret_budgeting').value = '{{ budgeting.maret_budgeting }}';
+    document.getElementById('id_maret_realisasi').value = '{{ budgeting.maret_realisasi }}';
+    document.getElementById('id_april_budgeting').value = '{{ budgeting.april_budgeting }}';
+    document.getElementById('id_april_realisasi').value = '{{ budgeting.april_realisasi }}';
+    document.getElementById('id_mei_budgeting').value = '{{ budgeting.mei_budgeting }}';
+    document.getElementById('id_mei_realisasi').value = '{{ budgeting.mei_realisasi }}';
+    document.getElementById('id_juni_budgeting').value = '{{ budgeting.juni_budgeting }}';
+    document.getElementById('id_juni_realisasi').value = '{{ budgeting.juni_realisasi }}';
+    document.getElementById('id_juli_budgeting').value = '{{ budgeting.juli_budgeting }}';
+    document.getElementById('id_juli_realisasi').value = '{{ budgeting.juli_realisasi }}';
+    document.getElementById('id_agustus_budgeting').value = '{{ budgeting.agustus_budgeting }}';
+    document.getElementById('id_agustus_realisasi').value = '{{ budgeting.agustus_realisasi }}';
+    document.getElementById('id_september_budgeting').value = '{{ budgeting.september_budgeting }}';
+    document.getElementById('id_september_realisasi').value = '{{ budgeting.september_realisasi }}';
+    document.getElementById('id_oktober_budgeting').value = '{{ budgeting.oktober_budgeting }}';
+    document.getElementById('id_oktober_realisasi').value = '{{ budgeting.oktober_realisasi }}';
+    document.getElementById('id_november_budgeting').value = '{{ budgeting.november_budgeting }}';
+    document.getElementById('id_november_realisasi').value = '{{ budgeting.november_realisasi }}';
+    document.getElementById('id_desember_budgeting').value = '{{ budgeting.desember_budgeting }}';
+    document.getElementById('id_desember_realisasi').value = '{{ budgeting.desember_realisasi }}';
+</script>
 {% endblock %}
 
 
 {# BLOCK javascript #}
 {% block javascript %}
-<script type="text/javascript">
-$(document).ready(function() {
-  $(document).on('click', '#confirm-delete', function(){
-      return confirm('Apakah anda yakin akan menghapus ini?');
+<script>
+    $(document).ready(function() {
+    $(document).on('submit','#id_budgeting_realisasi_form', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url "opreport:budgeting_realisasi" budgeting.id %}',
+        data: {
+          januari_budgeting: $('#id_januari_budgeting').val(),
+          januari_realisasi: $('#id_januari_realisasi').val(),
+          februari_budgeting: $('#id_februari_budgeting').val(),
+          februari_realisasi: $('#id_februari_realisasi').val(),
+          maret_budgeting: $('#id_maret_budgeting').val(),
+          maret_realisasi: $('#id_maret_realisasi').val(),
+          april_budgeting: $('#id_april_budgeting').val(),
+          april_realisasi: $('#id_april_realisasi').val(),
+          mei_budgeting: $('#id_mei_budgeting').val(),
+          mei_realisasi: $('#id_mei_realisasi').val(),
+          juni_budgeting: $('#id_juni_budgeting').val(),
+          juni_realisasi: $('#id_juni_realisasi').val(),
+          juli_budgeting: $('#id_juli_budgeting').val(),
+          juli_realisasi: $('#id_juli_realisasi').val(),
+          agustus_budgeting: $('#id_agustus_budgeting').val(),
+          agustus_realisasi: $('#id_agustus_realisasi').val(),
+          september_budgeting: $('#id_september_budgeting').val(),
+          september_realisasi: $('#id_september_realisasi').val(),
+          oktober_budgeting: $('#id_oktober_budgeting').val(),
+          oktober_realisasi: $('#id_oktober_realisasi').val(),
+          november_budgeting: $('#id_november_budgeting').val(),
+          november_realisasi: $('#id_november_realisasi').val(),
+          desember_budgeting: $('#id_desember_budgeting').val(),
+          desember_realisasi: $('#id_desember_realisasi').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+        success:function(data){
+          location.reload();
+        }
+      });
+    });
   });
-});
 </script>
 {% endblock %}

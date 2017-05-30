@@ -43,6 +43,12 @@
       </ul>
     </li>
 
-    <li><a href="{% url 'opreport:index_budgeting' %}">Budgeting & Realisas</a></li>
+    <li><a>Budgeting & Realisasi<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li class="sub_menu"><a href="{% url 'opreport:index_budgeting_kendari' %}">Kendari</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:index_budgeting_ts' %}">Teluk Sirih</a></li>
+        <li class="sub_menu"><a href="{% url 'opreport:input_budgeting' %}">Add Budgeting & Realisasi</a></li>
+      </ul>
+    </li>
   </ul>
 </li>
