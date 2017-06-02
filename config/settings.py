@@ -73,7 +73,7 @@ DATABASES = {
         'NAME': 'bdr_task', #db_name
         'HOST': '127.0.0.1', #db_server
         'USER': 'root', #db_username
-        'PASSWORD': '', #db_password
+        'PASSWORD': 'new2dev', #db_password
         'OPTIONS': {
             'sql_mode': 'traditional',
         }
