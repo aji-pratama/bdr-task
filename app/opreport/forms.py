@@ -2,11 +2,21 @@ from django import forms
 from .models import Project, Quotation, Tender, Delivery, Ticket, Cashadv, BudgetingRealisasi
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, ButtonHolder, Submit, Div
+from parsley.decorators import parsleyfy
 
-
+@parsleyfy
 class ProjectForm(forms.ModelForm):
-    class Meta:
+    job_no = forms.IntegerField()
+    value = forms.DecimalField()
+    statuspr_material = forms
+    statuspr_fabrication = forms.IntegerField()
+    statuspr_installation = forms.IntegerField()
+    invoice_tahap1 = forms.DecimalField()
+    invoice_tahap2 = forms.DecimalField()
+    invoice_tahap3 = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Project
         fields = ('om', 'location', 'job_no', 'project_name',
                 'spk_no', 'value', 'statuspr_material',
@@ -38,8 +48,12 @@ class ProjectForm(forms.ModelForm):
 
 
 class QuotationForm(forms.ModelForm):
-    class Meta:
+    quotation_no = forms.IntegerField()
+    qty = forms.DecimalField()
+    bid_price = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Quotation
         fields = ('tanggal', 'inquiry_no', 'quotation_no', 'costumer',
                 'desc_material', 'qty', 'unit', 'bid_price', 'status', )
@@ -67,8 +81,13 @@ class QuotationForm(forms.ModelForm):
 
 # TENDER FORMS
 class TenderForm(forms.ModelForm):
-    class Meta:
+    quotation_no = forms.IntegerField()
+    addcost_bidbond = forms.DecimalField()
+    addcost_reffbank = forms.DecimalField()
+    addcost_document = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Tender
         fields = ('om','quotation_no','location','tender_name','rks_no',
                 'process_registration','process_aanwizing','process_openbid',
@@ -97,10 +116,13 @@ class TenderForm(forms.ModelForm):
             ),
         )
 
-# TENDER FORMS
+# DELIVERY FORMS
 class DeliveryForm(forms.ModelForm):
-    class Meta:
+    value_dpp = forms.DecimalField()
+    value_ppn = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Delivery
         fields = ('om','location','job_no','description_material','vendor','value_dpp',
                 'value_ppn','progress_dono','progress_leadtime',
@@ -127,10 +149,13 @@ class DeliveryForm(forms.ModelForm):
             ),
         )
 
-# CASH ADV
+# TICKET PROJECT
 class TicketForm(forms.ModelForm):
-    class Meta:
+    cost = forms.DecimalField()
+    payment = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Ticket
         fields = ('date_flight','om','name','customer','id_jobno','purpose','cost','payment')
 
@@ -157,8 +182,14 @@ class TicketForm(forms.ModelForm):
 
 # Cashadv
 class CashadvForm(forms.ModelForm):
-    class Meta:
+    id_jobno = forms.IntegerField()
+    car = forms.DecimalField()
+    pi = forms.DecimalField()
+    actual_cost = forms.DecimalField()
+    receive_payment = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = Cashadv
         fields = ('date_request','om','name_of_payee','customer','id_jobno','purpose','car','pi','actual_cost','receive_payment','status')
 
@@ -186,8 +217,33 @@ class CashadvForm(forms.ModelForm):
 
 # BudgetingRealisasi
 class BudgetingRealisasiForm(forms.ModelForm):
-    class Meta:
+    januari_budgeting = forms.DecimalField()
+    januari_realisasi = forms.DecimalField()
+    februari_budgeting = forms.DecimalField()
+    februari_realisasi = forms.DecimalField()
+    maret_budgeting = forms.DecimalField()
+    maret_realisasi = forms.DecimalField()
+    april_budgeting = forms.DecimalField()
+    april_realisasi = forms.DecimalField()
+    mei_budgeting = forms.DecimalField()
+    mei_realisasi = forms.DecimalField()
+    juni_budgeting = forms.DecimalField()
+    juni_realisasi = forms.DecimalField()
+    juli_budgeting = forms.DecimalField()
+    juli_realisasi = forms.DecimalField()
+    agustus_budgeting = forms.DecimalField()
+    agustus_realisasi = forms.DecimalField()
+    september_budgeting = forms.DecimalField()
+    september_realisasi = forms.DecimalField()
+    oktober_budgeting = forms.DecimalField()
+    oktober_realisasi = forms.DecimalField()
+    november_budgeting = forms.DecimalField()
+    november_realisasi = forms.DecimalField()
+    desember_budgeting = forms.DecimalField()
+    desember_realisasi = forms.DecimalField()
 
+    class Meta:
+        parsley_namespace = 'parsley'
         model = BudgetingRealisasi
         fields = ('location','coa','deskripsi')
 

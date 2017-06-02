@@ -19,6 +19,7 @@ AUTH_USER_MODEL = 'account.MyUser'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 INSTALLED_APPS = [
+    'parsley',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
