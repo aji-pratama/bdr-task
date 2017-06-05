@@ -3,6 +3,7 @@ from .models import Pkt, Datas
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 import xlwt
+from xlwt import Workbook, Worksheet, easyxf
 # from app.account.models import MyUser
 # from django.contrib.auth.models import User
 
@@ -136,12 +137,12 @@ def export_users_xls(request):
     # Sheet header, first row
     row_num = 0
 
-    font_style = xlwt.XFStyle()
-    font_style.font.bold = True
-
+    #HEADER Sheet Koefisien
+    style_string = "font: bold on; Alignment: horz center"
+    wsstyle_body = xlwt.easyxf(style_string)
     columns = ['TEKS', 'KOEFISIEN']
     for col_num in range(len(columns)):
-        ws.write(row_num, col_num, columns[col_num], font_style)
+        ws.write(row_num, col_num, columns[col_num], wsstyle_body)
 
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
@@ -164,12 +165,18 @@ def export_users_xls(request):
             ws.write(row_num, 1, rowd[col_num], font_style)
 
     ws.write(row_num, 0, 'Harga Prakiraan Sementara', font_style)
+    ws.col(0).width = 33500
+    ws.col(1).width = 3800
 
 
-    #Sheet2
-    wr.write(1,0,'Poin Hasil Perhitungan', font_style)
-    wr.write(2,0,'Kategori HPS', font_style)
+    #Sheet POIN HAsil Perhitungan
+    style_string = "font: bold on;"
+    wrstyle_head = xlwt.easyxf(style_string)
 
+    wr.write(1,0,'Poin Hasil Perhitungan', wrstyle_head)
+    wr.write(2,0,'Kategori HPS', wrstyle_head)
+    wr.col(0).width = 10000
+    wr.col(1).width = 6000
 
     #Data
     datas = Datas.objects.get(id=1)
@@ -196,8 +203,10 @@ def export_users_xls(request):
     else:
         ranges = "Data dibawah ketentuan"
 
-    wr.write(1,1, count)
-    wr.write(2,1, ranges)
+    style_string = "Alignment: horz center"
+    wrstyle_body = xlwt.easyxf(style_string)
+    wr.write(1,1, count, wrstyle_body)
+    wr.write(2,1, ranges, wrstyle_body)
 
     wr.write(5,0, 'Pre Calculating')
 
