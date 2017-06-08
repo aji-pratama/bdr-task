@@ -4,8 +4,6 @@ django-crispy-forms==1.6.1
 django-parsley==0.6
 djangorestframework==3.6.3
 mysql==0.0.1
-mysql-connector==2.1.4
-MySQL-python==1.2.5
 olefile==0.44
 packaging==16.8
 Parsley==1.3
