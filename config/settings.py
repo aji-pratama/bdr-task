@@ -70,13 +70,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'bdr_task', #db_name
         'HOST': '127.0.0.1', #db_server
         'USER': 'root', #db_username
         'PASSWORD': 'new2dev', #db_password
         'OPTIONS': {
-            'sql_mode': 'traditional',
+            'autocommit': True,
         }
     }
 }
