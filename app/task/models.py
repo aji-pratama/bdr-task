@@ -15,4 +15,4 @@ class Task(models.Model):
     doing_date = models.DateField()
 
     def __unicode__(self):
-		return self.title
+        return self.title

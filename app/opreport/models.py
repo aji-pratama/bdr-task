@@ -23,7 +23,7 @@ class Project(models.Model):
     remark = models.CharField(max_length=220, blank=True, null=True)
 
     def __unicode__(self):
-		return self.project_name
+        return self.project_name
 
 
 class Quotation(models.Model):
@@ -38,7 +38,7 @@ class Quotation(models.Model):
     status = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
-		return self.costumer
+        return self.costumer
 
 class Tender(models.Model):
     om = models.CharField(max_length=20, choices=OM_CHOICES)
@@ -55,7 +55,7 @@ class Tender(models.Model):
     remark = models.CharField(max_length=220)
 
     def __unicode__(self):
-		return self.quotation_no
+        return self.quotation_no
 
 class Delivery(models.Model):
     om = models.CharField(max_length=20, choices=OM_CHOICES)
@@ -72,7 +72,7 @@ class Delivery(models.Model):
     order_status = models.CharField(max_length=200)
 
     def __unicode__(self):
-		return self.job_no
+        return self.job_no
 
 class Ticket(models.Model):
     date_flight = models.CharField(max_length=150)
@@ -85,7 +85,7 @@ class Ticket(models.Model):
     payment = models.CharField( max_length=150)
 
     def __unicode__(self):
-		return self.date_flight
+        return self.date_flight
 
 class Cashadv(models.Model):
     date_request = models.DateField()
@@ -101,7 +101,7 @@ class Cashadv(models.Model):
     status = models.CharField(max_length=100)
 
     def __unicode__(self):
-		return self.purpose
+        return self.purpose
 
 # Budgeting terakhir cz rada ribet
 class BudgetingRealisasi(models.Model):
@@ -140,7 +140,7 @@ class BudgetingRealisasi(models.Model):
     desember_realisasi = models.DecimalField(decimal_places=2, max_digits=12, default=0)
 
     def __unicode__(self):
-		return self.deskripsi
+        return self.deskripsi
 
 
 
