@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bdr_task', #db_name
         'HOST': '127.0.0.1', #db_server
         'USER': 'root', #db_username
