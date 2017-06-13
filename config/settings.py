@@ -125,3 +125,5 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/login/'
+
+ALLOWED_HOSTS = ['192.168.5.132']
