@@ -73,7 +73,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bdr_task', #db_name
         'HOST': '127.0.0.1', #db_server
-        'USER': 'root', #db_username
+        'USER': 'bdrdev', #db_username
         'PASSWORD': 'new2dev', #db_password
         'OPTIONS': {
             'autocommit': True,
