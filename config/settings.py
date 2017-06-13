@@ -49,7 +49,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/var/www/templates'],
+        'DIRS': ['/var/www/bdr-task/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
