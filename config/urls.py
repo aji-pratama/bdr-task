@@ -29,6 +29,9 @@ urlpatterns = [
     #Operation Report
     url(r'^operation-report/', include('app.opreport.opreport_urls')),
 
+    #Budgeting
+    url(r'^budgeting/', include('app.budgeting.budgeting_urls')),
+
     #Testing way
     url(r'^testing/', include('app.testing.testing_urls')),
 
