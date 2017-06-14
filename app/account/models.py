@@ -38,6 +38,9 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     atasan = models.ForeignKey('MyUser', null=True, blank=True)
+    unit = models.CharField(max_length=40, null=True, blank=True)
+    departement = models.CharField(max_length=40, null=True, blank=True)
+    divisi = models.CharField(max_length=40, null=True, blank=True)
 
     objects = MyUserManager()
 
