@@ -4,16 +4,34 @@ from .forms import BudgetingForm
 from django.views.generic.edit import FormView, CreateView
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import Budgeting
+from .models import Budgeting, Item
 
-class BudgetingCreate(CreateView):
-    model = Budgeting
-    form_class = BudgetingForm
-    template_name = 'budgeting/create_budgeting.html'
-    success_url = '/'
+def add_budgeting(request):
+    if request.POST:
+        unit = request.user.unit
+        departement = request.user.departement
+        divisi = request.user.divisi
+        jobid = request.POST.get('jobid')
+        nodoc = request.POST.get('nodoc')
+        type_proposal = request.POST.get('type_proposal')
+        date = request.POST.get('date')
+        amount = request.POST.get('amount')
+        disc = request.POST.get('disc')
+        tax = request.POST.get('tax')
+        total_amount = request.POST.get('total_amount')
+        remark = request.POST.get('remark')
+        insert_data = Budgeting(unit=unit, departement=departement, divisi=divisi,
+                                jobid=jobid, nodoc=nodoc, type_proposal=type_proposal,
+                                date=date, amount=amount, disc=disc, tax=tax, total_amount=total_amount,
+                                remark=remark)
+        insert_data.save()
 
-    def form_valid(self, form):
-        form.instance.unit = self.request.user.unit
-        form.instance.departement = self.request.user.departement
-        form.instance.divisi = self.request.user.divisi
-        return super(BudgetingCreate, self).form_valid(form)
+        return HttpResponseRedirect('/')
+    form = BudgetingForm()
+    return render(request, 'budgeting/create_budgeting.html', {'form':form})
+
+
+def budgeting_items(request, pk):
+    budgeting =  Budgeting.objects.get(id=pk)
+    items = Item.objects.filter(budgeting=budgeting)
+    return render(request, 'budgeting/items_budgeting.html', {'budgeting': budgeting, 'items':items})

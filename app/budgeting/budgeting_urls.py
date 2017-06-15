@@ -5,5 +5,7 @@ app_name = 'budgeting'
 
 urlpatterns = [
         # Budgeting
-        url(r'^add-budgeting$', views.BudgetingCreate.as_view(), name='create_budgeting')
+        url(r'^add-budgeting$', views.add_budgeting, name='create_budgeting'),
+        url(r'^items-budgeting-(?P<pk>\d+)$', views.budgeting_items, name='budgeting_items'),
+
     ]
