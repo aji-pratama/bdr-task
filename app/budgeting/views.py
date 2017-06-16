@@ -34,4 +34,12 @@ def add_budgeting(request):
 def budgeting_items(request, pk):
     budgeting =  Budgeting.objects.get(id=pk)
     items = Item.objects.filter(budgeting=budgeting)
+    if request.POST:
+        description = request.POST.get('description')
+        qty = request.POST.get('qty')
+        amount = request.POST.get('amount')
+        tot_amount = request.POST.get('tot_amount')
+        insert_data = Item(description=description,qty=qty,amount=amount,tot_amount=tot_amount, budgeting=budgeting)
+        insert_data.save()
+        return HttpResponseRedirect('/budgeting')
     return render(request, 'budgeting/items_budgeting.html', {'budgeting': budgeting, 'items':items})

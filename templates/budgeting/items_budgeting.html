@@ -50,14 +50,16 @@
             <td colspan="15" style="text-align: center">Data Kosong</td>
           </tr>
           {% endif %}
+        <form id="id_items_form" onsubmit="formSubmit();">{% csrf_token %}
           <tr>
             <td></td>
-            <td><input placeholder="Description" type="text" name="" class="form-control"></td>
-            <td><input placeholder="Quantity" id="id_qty" type="number" name="" class="form-control"></td>
-            <td><input placeholder="Amount" id="id_amount" type="number" name="" class="form-control"></td>
-            <td><input placeholder="Total Amount" id="id_tot_amount" type="number" name="" class="form-control" disabled="true"></td>
+            <td><input placeholder="Description" id="id_description" type="text" class="form-control"></td>
+            <td><input placeholder="Quantity" id="id_qty" type="number" class="form-control"></td>
+            <td><input placeholder="Amount" id="id_amount" type="number" class="form-control"></td>
+            <td><input placeholder="Total Amount" id="id_tot_amount" type="number" class="form-control" disabled="true"></td>
             <td><input class="btn btn-default btn-sm" type="submit" name="submit" value="Add"></td>
           </tr>
+        </form>
         </tbody>
       </table>
     </div>
@@ -65,17 +67,63 @@
   </div>
 </div>
 
-<script type="text/javascript" src="{% static '/js/jquery-3.1.1.js'%}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
 <script>
-  $(document).ready(function() {
-    $('input#id_qty, input#id_amount').change(function(e)  {
-     var total = 0;
-     var quantity = parseFloat($('#id_qty').val());
-     var amount = parseFloat($('#id_amount').val());
+  var qty = document.getElementById('id_qty');
+  var amount = document.getElementById('id_amount');
+  var total = document.getElementById('id_tot_amount');
+  total.value = 0;
 
-     total = quantity * amount;
-     $('#id_tot_amount').val( total );
-   });
+  qty.onkeyup = function(){
+    document.getElementById('id_tot_amount').value = parseFloat(qty.value) * parseInt(amount.value);
+  };
+
+  amount.onkeyup = function(){
+    document.getElementById('id_tot_amount').value = parseFloat(qty.value) * parseInt(amount.value);
+  };
+
+
+// function formSubmit() {
+//   var xhr = new XMLHttpRequest();
+//   var url = "{% url 'budgeting:budgeting_items' budgeting.id %}";
+//   xhr.open("POST", url, true);
+//   xhr.setRequestHeader("Content-type", "application/json");
+//   xhr.onreadystatechange = function () {
+//       if (xhr.readyState === 4 && xhr.status === 200) {
+//           var json = JSON.parse(xhr.responseText);
+//       }
+//   };
+//   var data = JSON.stringify({
+//                 'description': getElementById('id_description').value,
+//                 'qty': getElementById('id_qty').value,
+//                 'amount': getElementById('#id_amount').value,
+//                 'tot_amount': getElementById('#id_amount').value,
+//                 // csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+//             });
+//   xhr.send(data);
+// }
+
+  $(document).ready(function() {
+    $(document).on('submit','#id_items_form', function(e){
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '{% url "budgeting:budgeting_items" budgeting.id %}',
+        data: {
+          description: $('#id_description').val(),
+          qty: $('#id_qty').val(),
+          amount: $('#id_amount').val(),
+          tot_amount: $('#id_amount').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+
+        success:function(data){
+          location.reload();
+        }
+      });
+
+    });
   });
 </script>
+
 {% endblock %}
