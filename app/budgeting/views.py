@@ -3,8 +3,10 @@ from __future__ import unicode_literals
 from .forms import BudgetingForm
 from django.views.generic.edit import FormView, CreateView
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from .models import Budgeting, Item
+from django.core import serializers
+import json
 
 def add_budgeting(request):
     if request.POST:
@@ -25,8 +27,8 @@ def add_budgeting(request):
                                 date=date, amount=amount, disc=disc, tax=tax, total_amount=total_amount,
                                 remark=remark)
         insert_data.save()
-
-        return HttpResponseRedirect('/')
+        idb = insert_data.id
+        return HttpResponseRedirect('/budgeting/items-budgeting-%s' % idb)
     form = BudgetingForm()
     return render(request, 'budgeting/create_budgeting.html', {'form':form})
 
@@ -43,3 +45,8 @@ def budgeting_items(request, pk):
         insert_data.save()
         return HttpResponseRedirect('/budgeting')
     return render(request, 'budgeting/items_budgeting.html', {'budgeting': budgeting, 'items':items})
+
+def get_items(request):
+    items = Item.objects.all()
+    data = serializers.serialize('json', items)
+    return HttpResponse(data, content_type='application/json')

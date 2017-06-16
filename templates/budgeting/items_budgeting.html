@@ -34,7 +34,7 @@
           {% for item in items  %}
 
           <tr class="even pointer">
-            <td>{{  forloop.counter }} </td>
+            <td>{{ forloop.counter }} </td>
             <td>{{ item.description }}</td>
             <td>{{ item.qty }}</td>
             <td>{{ item.amount }}</td>
@@ -82,28 +82,8 @@
     document.getElementById('id_tot_amount').value = parseFloat(qty.value) * parseInt(amount.value);
   };
 
-
-// function formSubmit() {
-//   var xhr = new XMLHttpRequest();
-//   var url = "{% url 'budgeting:budgeting_items' budgeting.id %}";
-//   xhr.open("POST", url, true);
-//   xhr.setRequestHeader("Content-type", "application/json");
-//   xhr.onreadystatechange = function () {
-//       if (xhr.readyState === 4 && xhr.status === 200) {
-//           var json = JSON.parse(xhr.responseText);
-//       }
-//   };
-//   var data = JSON.stringify({
-//                 'description': getElementById('id_description').value,
-//                 'qty': getElementById('id_qty').value,
-//                 'amount': getElementById('#id_amount').value,
-//                 'tot_amount': getElementById('#id_amount').value,
-//                 // csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-//             });
-//   xhr.send(data);
-// }
-
   $(document).ready(function() {
+
     $(document).on('submit','#id_items_form', function(e){
       e.preventDefault();
       $.ajax({
