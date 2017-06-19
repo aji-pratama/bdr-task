@@ -48,6 +48,11 @@ def budgeting_items(request, pk):
 
 def get_items(request, pk):
     budgeting =  Budgeting.objects.get(id=pk)
-    items = Item.objects.filter(budgeting=budgeting)
+    items = Item.objects.filter(budgeting=budgeting).order_by('id')
     data = serializers.serialize('json', items)
     return HttpResponse(data, content_type='application/json')
+
+def delete_item(request, pk):
+    item = Item.objects.get(id=pk)
+    item.delete()
+    return HttpResponseRedirect('/budgeting/items-budgeting-%s' % item.budgeting.id)

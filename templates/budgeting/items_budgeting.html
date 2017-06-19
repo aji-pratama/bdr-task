@@ -3,35 +3,35 @@
 {% load static %}
 {# BLOCK MAIN Content #}
 <div class="col-md-12 col-sm-12 col-xs-12">
-{% block content %}
-<div class="x_panel">
+  {% block content %}
+  <div class="x_panel">
 
-<style media="screen">
-body{
-  counter-reset: Serial;           /* Set the Serial counter to 0 */
-}
+  <style media="screen">
+  body{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+  }
 
-table{
-  border-collapse: separate;
-}
+  table{
+    border-collapse: separate;
+  }
 
-tbody#item_id tr td:first-child:before{
-  counter-increment: Serial;      /* Increment the Serial counter */
-  content: counter(Serial); /* Display the counter */
-}
-</style>
+  tbody#item_id tr td:first-child:before{
+    counter-increment: Serial;      /* Increment the Serial counter */
+    content: counter(Serial); /* Display the counter */
+  }
+  </style>
 
-    <div class="x_title">
-      <h2> Item List {{ budgeting.jobid }}</h2>
-      <ul class="nav navbar-right panel_toolbox">
-        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
-    </div>
+  <div class="x_title">
+    <h2> Item List {{ budgeting.jobid }}</h2>
+    <ul class="nav navbar-right panel_toolbox">
+      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
 
-    <div class="x_content">
-      <div class="table-responsive">
+  <div class="x_content">
+    <div class="table-responsive">
       <table class="table table-bordered jambo_table">
         <thead class="heading">
           <tr>
@@ -49,98 +49,91 @@ tbody#item_id tr td:first-child:before{
         </tbody>
 
         <tbody>
-        <form id="id_items_form" onsubmit="formSubmit();">{% csrf_token %}
-          <tr>
-            <td></td>
-            <td><input placeholder="Description" id="id_description" type="text" class="form-control"></td>
-            <td><input placeholder="Quantity" id="id_qty" type="number" class="form-control"></td>
-            <td><input placeholder="Amount" id="id_amount" type="number" class="form-control"></td>
-            <td><input id="id_tot_amount" type="number" class="form-control" disabled="true"></td>
-            <td><input class="btn btn-default btn-sm" type="submit" name="submit" value="Add"></td>
-          </tr>
-        </form>
+          <form id="id_items_form" onsubmit="formSubmit();">{% csrf_token %}
+            <tr>
+              <td><i class="fa fa-hashtag"></i></td>
+              <td><input placeholder="Description" id="id_description" type="text" class="form-control"></td>
+              <td><input placeholder="Quantity" id="id_qty" type="number" class="form-control"></td>
+              <td><input placeholder="Amount" id="id_amount" type="number" class="form-control"></td>
+              <td><input id="id_tot_amount" type="number" class="form-control" disabled="true"></td>
+              <td><input class="btn btn-default btn-sm" type="submit" name="submit" value="Add"></td>
+            </tr>
+          </form>
         </tbody>
       </table>
     </div>
-    </div>
   </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
 <script>
-  $(document).ready(function() {
-//On KeyUp JQuery Calculate data
-    $('#id_qty, #id_amount').on('input',function() {
-      var qty = parseInt($('#id_qty').val());
-      var mount = parseFloat($('#id_amount').val());
-      $('#id_tot_amount').val((qty * mount ? qty * mount : 0).toFixed(2));
-    });
+$(document).ready(function() {
+  //On KeyUp JQuery Calculate data
+  $('#id_qty, #id_amount').on('input',function() {
+    var qty = parseInt($('#id_qty').val());
+    var mount = parseFloat($('#id_amount').val());
+    $('#id_tot_amount').val((qty * mount ? qty * mount : 0).toFixed(2));
+  });
 
-//GET Data From Database
+  //GET Data From Database
+  var ajax_call = function(){
     $.ajax({
       type: 'GET',
       url: '{% url "budgeting:get_items" budgeting.id %}',
       dataType: 'json',
       success:function(data){
+        $('#item_id').empty(); //Untuk mengkosongkan table biar gak duplicated
         for (i in data){
-          coa = data[i].fields.coa;
+          id = data[i].pk;
           description = data[i].fields.description;
           qty = data[i].fields.qty;
           amount = data[i].fields.amount;
           tot_amount = data[i].fields.tot_amount;
           budgeting = data[i].fields.budgeting;
-
+          url_delete = '/budgeting/delete-item'+id
           $('#item_id').append(
             "<tr class='itemrow'>"
-              +"<td></td>"
-              +"<td>"+description+"</td>"
-              +"<td>"+qty+"</td>"
-              +"<td>"+amount+"</td>"
-              +"<td>"+tot_amount+"</td>"
+              +"<td></td><td>"+description+"</td><td>"+qty+"</td><td>"+amount+"</td><td>"+tot_amount+"</td>"
               +"<td style='text-align: center;'>"
-                +"<a id='confirm-delete' href='' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></a>"
+                +"<a id='confirm-delete' href='"+url_delete+"' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></a>"
               +"</td>"
             +"</tr>"
           );
         }
       }
     });
-//On Submit to Database
-    $(document).on('submit','#id_items_form', function(e){
-      e.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: '{% url "budgeting:budgeting_items" budgeting.id %}',
-        data: {
-          description: $('#id_description').val(),
-          qty: $('#id_qty').val(),
-          amount: $('#id_amount').val(),
-          tot_amount: $('#id_tot_amount').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-        success:function(data){}
-      });
-      //Auto Add data into Table
-      $('#item_id').append(
-        "<tr class='itemrow'>"
-          +"<td></td>"
-          +"<td>"+$('#id_description').val()+"</td>"
-          +"<td>"+$('#id_qty').val()+"</td>"
-          +"<td>"+$('#id_amount').val()+"</td>"
-          +"<td>"+$('#id_tot_amount').val()+"</td>"
-          +"<td style='text-align: center;'>"
-            +"<a id='confirm-delete' href='' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></a>"
-          +"</td>"
-        +"</tr>"
-      );
-      //Cleaning Data
-      $('#id_description').val("");
-      $('#id_qty').val("");
-      $('#id_amount').val("");
-      $('#id_tot_amount').val("");
+  }
+  var interval = 800; // 5 secs
+  setInterval(ajax_call, interval);
 
+  //On Submit to Database
+  $(document).on('submit','#id_items_form', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "budgeting:budgeting_items" budgeting.id %}',
+      data: {
+        description: $('#id_description').val(),
+        qty: $('#id_qty').val(),
+        amount: $('#id_amount').val(),
+        tot_amount: $('#id_tot_amount').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success:function(data){}
     });
+    //Cleaning Data
+    $('#id_description').val("");
+    $('#id_qty').val("");
+    $('#id_amount').val("");
+    $('#id_tot_amount').val("");
   });
+
+  //On Delete Data
+  $(document).on('click', '#confirm-delete', function(){
+    return confirm('Apakah anda yakin akan menghapus ini?');
+  });
+});
 </script>
 
 {% endblock %}

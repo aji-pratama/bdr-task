@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'app.pkt',
     'app.opreport',
     'app.testing',
+    'app.budgeting',
 ]
 
 MIDDLEWARE = [
