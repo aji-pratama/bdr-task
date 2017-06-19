@@ -16,11 +16,11 @@ class Budgeting(models.Model):
     nodoc = models.CharField(max_length=40, blank=False, null=False)
     type_proposal = models.CharField(max_length=26, choices=TYPE_PROPOSAL_CHOICES)
     date = models.DateField()
-    amount = models.DecimalField(max_digits=13, decimal_places=2)
-    disc = models.DecimalField(max_digits=3, decimal_places=2)
-    tax = models.CharField(max_length=100)
-    total_amount = models.DecimalField(max_digits=13, decimal_places=2)
-    remark = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=13, decimal_places=2, default=0, null=True)
+    disc = models.DecimalField(max_digits=13, decimal_places=2, default=0, null=True)
+    tax = models.CharField(max_length=100, default='', null=True)
+    total_amount = models.DecimalField(max_digits=13, decimal_places=2, default=0, null=True)
+    remark = models.CharField(max_length=100, default='', null=True)
 
     def __unicode__(self):
         return self.nodoc

@@ -9,9 +9,7 @@ class BudgetingForm(forms.ModelForm):
     class Meta:
         parsley_namespace = 'parsley'
         model = Budgeting
-        fields = ('jobid',
-                    'nodoc', 'type_proposal', 'date', 'amount',
-                    'disc', 'tax', 'total_amount', 'remark', )
+        fields = ('jobid', 'nodoc', 'type_proposal', 'date', 'tax', 'remark', )
 
     def __init__(self, *args, **kwargs):
         super(BudgetingForm, self).__init__(*args, **kwargs)
@@ -23,10 +21,9 @@ class BudgetingForm(forms.ModelForm):
         self.helper.layout = Layout(
             Div(
                 Div('jobid', 'nodoc', 'type_proposal',
-                    'date', 'amount',
                      css_class='col-md-6'),
 
-                Div('disc', 'tax', 'total_amount', 'remark',
+                Div('date', 'tax', 'remark',
                     Div(
                         Div(Submit('save', 'Save', css_class='btn btn-primary btn-lg'), css_class='col-md-12'), css_class='row'
                     ),
