@@ -46,7 +46,8 @@ def budgeting_items(request, pk):
         return HttpResponseRedirect('/budgeting')
     return render(request, 'budgeting/items_budgeting.html', {'budgeting': budgeting, 'items':items})
 
-def get_items(request):
-    items = Item.objects.all()
+def get_items(request, pk):
+    budgeting =  Budgeting.objects.get(id=pk)
+    items = Item.objects.filter(budgeting=budgeting)
     data = serializers.serialize('json', items)
     return HttpResponse(data, content_type='application/json')
