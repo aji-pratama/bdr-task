@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_delivery(request):
     try:
         form = DeliveryForm()
-        delivery_list = Delivery.objects.all()
+        delivery_list = Delivery.objects.all().order_by('-id')
         paginator = Paginator(delivery_list, 5)
 
         page = request.GET.get('page')

@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_ticket(request):
     try:
         form = TicketForm()
-        ticket_list = Ticket.objects.all()
+        ticket_list = Ticket.objects.all().order_by('-id')
         paginator = Paginator(ticket_list, 5)
 
         page = request.GET.get('page')

@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_quotation(request):
     try:
         form = QuotationForm()
-        quotation_list = Quotation.objects.all()
+        quotation_list = Quotation.objects.all().order_by('-id')
         paginator = Paginator(quotation_list, 5) # Show 5 contacts per page
 
         page = request.GET.get('page')

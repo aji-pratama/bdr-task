@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_project(request):
     try:
         form = ProjectForm()
-        project_list = Project.objects.all()
+        project_list = Project.objects.all().order_by('-id')
         paginator = Paginator(project_list, 5) # Show 25 contacts per page
 
         page = request.GET.get('page')

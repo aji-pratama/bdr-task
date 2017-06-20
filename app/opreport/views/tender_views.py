@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_tender(request):
     try:
         form = TenderForm()
-        tender_list = Tender.objects.all()
+        tender_list = Tender.objects.all().order_by('-id')
         paginator = Paginator(tender_list, 5) # Show 25 contacts per page
 
         page = request.GET.get('page')

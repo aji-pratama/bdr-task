@@ -11,7 +11,7 @@ from django.contrib import messages
 def index_budgeting_kendari(request):
     try:
         form = BudgetingRealisasiForm()
-        budgeting_list = BudgetingRealisasi.objects.filter(location="Kendari")
+        budgeting_list = BudgetingRealisasi.objects.filter(location="Kendari").order_by('-id')
         paginator = Paginator(budgeting_list, 5)
         page = request.GET.get('page')
 
@@ -30,7 +30,7 @@ def index_budgeting_kendari(request):
 def index_budgeting_ts(request):
     try:
         form = BudgetingRealisasiForm()
-        budgeting_list = BudgetingRealisasi.objects.filter(location="Teluk Sirih")
+        budgeting_list = BudgetingRealisasi.objects.filter(location="Teluk Sirih").order_by('-id')
         paginator = Paginator(budgeting_list, 5)
         page = request.GET.get('pagets')
 

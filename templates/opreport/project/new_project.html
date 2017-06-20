@@ -31,39 +31,3 @@
 </div>
 
 {% endblock %}
-
-{% block 'javascript' %}
-<script>
-  $(document).ready(function() {
-    $(document).on('submit','#id_project_form', function(e){
-      e.preventDefault();
-
-      $.ajax({
-        type: 'POST',
-        url: '{% url "opreport:input_project" %}',
-        data: {
-          om: $('#id_om').val(),
-          location: $('#id_location').val(),
-          job_no: $('#id_job_no').val(),
-          project_name: $('#id_project_name').val(),
-          spk_no: $('#id_spk_no').val(),
-          value: $('#id_value').val(),
-          statuspr_material: $('#id_statuspr_material').val(),
-          statuspr_fabrication: $('#id_statuspr_fabrication').val(),
-          statuspr_installation: $('#id_statuspr_installation').val(),
-          invoice_tahap1: $('#id_invoice_tahap1').val(),
-          invoice_tahap2: $('#id_invoice_tahap2').val(),
-          invoice_tahap3: $('#id_invoice_tahap3').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-
-        success:function(data){
-          location.reload();
-        }
-
-      });
-
-    });
-  });
-</script>
-{% endblock %}

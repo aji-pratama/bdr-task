@@ -48,36 +48,3 @@ $( function() {
 </script>
 
 {% endblock %}
-
-{% block 'javascript' %}
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(document).on('submit','#id_ticket_form', function(e){
-      e.preventDefault();
-
-      $.ajax({
-        type: 'POST',
-        name: $('#id_name').val(),
-        url: '{% url "opreport:edit_ticket" %}',
-        data: {
-          date_flight: $('#id_date_flight').val(),
-          om: $('#id_om').val(),
-          customer: $('#id_customer').val(),
-          id_jobno: $('#id_id_jobno').val(),
-          purpose: $('#id_purpose').val(),
-          cost: $('#id_cost').val(),
-          payment: $('#id_payment').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-
-        success:function(data){
-          location.reload();
-        }
-
-      });
-
-    });
-  });
-</script>
-
-{% endblock %}

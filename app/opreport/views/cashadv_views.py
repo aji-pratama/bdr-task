@@ -10,7 +10,7 @@ from django.contrib import messages
 def index_cashadv(request):
     try:
         form = CashadvForm()
-        cashadv_list = Cashadv.objects.all()
+        cashadv_list = Cashadv.objects.all().order_by('-id')
         paginator = Paginator(cashadv_list, 5) # Show 25 contacts per page
 
         page = request.GET.get('page')
