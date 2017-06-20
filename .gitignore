@@ -2,3 +2,4 @@
 static/upload/*
 manage_dev.py
 config/settings_dev.py
+.imdone/
