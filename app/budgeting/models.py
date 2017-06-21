@@ -28,9 +28,9 @@ class Budgeting(models.Model):
 class Item(models.Model):
     coa = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=220)
-    qty = models.IntegerField(default=0)
-    amount = models.DecimalField(max_digits=13, decimal_places=2)
-    tot_amount = models.DecimalField(max_digits=13, decimal_places=2)
+    qty = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    amount = models.DecimalField(max_digits=20, decimal_places=2, default=0)
+    tot_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     budgeting = models.ForeignKey(Budgeting, on_delete=models.CASCADE)
 
     def __unicode__(self):

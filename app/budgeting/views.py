@@ -40,10 +40,10 @@ def budgeting_items(request, pk):
         description = request.POST.get('description')
         qty = request.POST.get('qty')
         amount = request.POST.get('amount')
-        tot_amount = request.POST.get('tot_amount')
-        insert_data = Item(description=description,qty=qty,amount=amount,tot_amount=tot_amount, budgeting=budgeting)
+        tot_amount = int(qty) * amount#request.POST.get('tot_amount')
+        insert_data = Item(description=description, qty=qty, amount=amount, tot_amount=tot_amount, budgeting=budgeting)
         insert_data.save()
-        return HttpResponseRedirect('/budgeting')
+        return HttpResponseRedirect('/budgeting/items-budgeting-%s' % budgeting.id)
     return render(request, 'budgeting/items_budgeting.html', {'budgeting': budgeting, 'items':items})
 
 def get_items(request, pk):
