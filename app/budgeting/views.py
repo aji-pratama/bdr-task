@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from .models import Budgeting, Item
 from django.core import serializers
 import json
+from decimal import *
 
 def add_budgeting(request):
     if request.POST:
@@ -38,9 +39,9 @@ def budgeting_items(request, pk):
     items = Item.objects.filter(budgeting=budgeting)
     if request.POST:
         description = request.POST.get('description')
-        qty = request.POST.get('qty')
-        amount = request.POST.get('amount')
-        tot_amount = int(qty) * amount#request.POST.get('tot_amount')
+        qty = int(request.POST.get('qty'))
+        amount = Decimal(request.POST.get('amount'))
+        tot_amount = qty * amount#request.POST.get('tot_amount')
         insert_data = Item(description=description, qty=qty, amount=amount, tot_amount=tot_amount, budgeting=budgeting)
         insert_data.save()
         return HttpResponseRedirect('/budgeting/items-budgeting-%s' % budgeting.id)
