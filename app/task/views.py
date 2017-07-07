@@ -12,7 +12,7 @@ from app.account.models import MyUser
 @login_required(login_url='/login')
 @user_passes_test(lambda u:u.is_staf, login_url='/login')
 def input_task(request):
-    tasks = Task.objects.filter(created_by=request.user, created_date=datetime.now().date()).order_by('-id')
+    tasks = Task.objects.filter(created_by=request.user, approval_status=False, created_date=datetime.now().date()).order_by('-id')
 
     if request.POST:
         title = request.POST.get('title')
