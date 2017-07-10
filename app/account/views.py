@@ -21,7 +21,7 @@ def  dashboard(request):
         return render(request, 'atasan/index_atasan.html')
 
     if request.user.is_authenticated and request.user.is_staf:
-        return render(request, 'staff/index_staff.html')
+        return HttpResponseRedirect('/doing-task')
 
     return HttpResponseRedirect('/login')
 

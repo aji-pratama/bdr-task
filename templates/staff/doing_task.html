@@ -32,7 +32,7 @@
             {% if doing_tasks %}
             {% for task in doing_tasks %}
             <li class="list-group-item">
-              <a href="#"><strong>{{ task.title }}</strong></a>
+              <a href="#"  data-toggle="modal" data-target="#modal-doing-{{ task.id }}"><strong>{{ task.title }}</strong></a>
               <a  href="{% url 'cek_done' task.id %}" class="btn btn-success btn-xs right" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i></a>
             </li>
             {% endfor %}
@@ -59,7 +59,7 @@
             {% if done_tasks %}
             {% for task in done_tasks %}
             <li class="list-group-item">
-              <a href="#"><strong>{{ task.title }}</strong></a>
+              <a href="#" data-toggle="modal" data-target="#modal-done-{{ task.id }}"><strong>{{ task.title }}</strong></a>
             </li>
             {% endfor %}
 
@@ -77,5 +77,53 @@
   </div>
 </div>
 </div>
+
+<!-- Modal PopUp Doing Task-->
+{% for task in doing_tasks %}
+<div class="modal fade" id="modal-doing-{{ task.id }}" role="dialog">
+   <div class="modal-dialog">
+
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">{{ task.title }} (Doing Task) </h4>
+       </div>
+       <div class="modal-body">
+         <p>{{ task.keterangan }}</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+
+  </div>
+</div>
+{% endfor %}
+<!--Modal PopUp-->
+
+<!-- Modal PopUp Done Task-->
+{% for task in done_tasks %}
+<div class="modal fade" id="modal-done-{{ task.id }}" role="dialog">
+   <div class="modal-dialog">
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">{{ task.title }} (Done Task)</h4>
+       </div>
+       <div class="modal-body">
+         <p>{{ task.keterangan }}</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+
+  </div>
+</div>
+{% endfor %}
+<!--Modal PopUp-->
+
 
 {% endblock %}
