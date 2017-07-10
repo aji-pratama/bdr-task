@@ -85,6 +85,16 @@ def cek_done(request, pk):
     return HttpResponseRedirect('/doing-task')
 
 
+def finish_today(request):
+    tasks = Task.objects.filter(done_status=False, doing_date=datetime.now().date())
+    for task in tasks:
+        task.doing_date = date.today() + timedelta(days=1)
+        task.updated_date = date.today()
+        task.update_info = task.update_info + " %s Unfinished| " %date.today()
+        task.save()
+    return HttpResponseRedirect('/doing-task')
+
+
 #ATASAN Pages Access
 
 #List of Staff who created Task Lists

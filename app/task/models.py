@@ -14,6 +14,7 @@ class Task(models.Model):
     created_by = models.ForeignKey(User)
     approval_by = models.ForeignKey(User, related_name='user_approval_by', null=True, blank=True)
     doing_date = models.DateField()
+    update_info = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.title

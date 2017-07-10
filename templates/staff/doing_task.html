@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <input class="btn btn-success" style="float: right;" type="submit" name="Finish Today" value="Finish Today">
+    <a id="confirm-finish" href="{% url 'finish_today' %}" class="btn btn-success" style="float: right;">Finish Today</a>
   </div>
 </div>
 </div>
@@ -124,6 +124,14 @@
 </div>
 {% endfor %}
 <!--Modal PopUp-->
+{% endblock %}
 
-
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).on('click', '#confirm-finish', function(){
+      return confirm('Apakah anda yakin, Task hari ini selesai? Jika Ya maka Task yang belum selesai akan di masukan ke Task List hari berikutnya.');
+  });
+});
+</script>
 {% endblock %}

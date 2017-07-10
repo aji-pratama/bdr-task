@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^delete-task-(?P<pk>\d+)$', task_views.delete_task, name='delete_task'),
     url(r'^doing-task/$', task_views.doing_task, name='doing_task'),
     url(r'^cek-done-(?P<pk>\d+)$', task_views.cek_done, name='cek_done'),
+    url(r'^finish-today$', task_views.finish_today, name='finish_today'),
 
     #Atasan
     url(r'^task-approval/$', task_views.task_approval, name='task_approval'),
