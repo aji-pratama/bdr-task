@@ -53,8 +53,8 @@
             {% if tasks %}
             {% for task in tasks %}
             <li class="list-group-item">
-              <a href="{% url 'edit_task' task.id %}"><strong>{{ task.title }}</strong></a>
-              <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
+              <a href="#" data-toggle="modal" data-target="#modal-task"><strong>{{ task.title }}</strong></a>
+              <a id="confirm-delete" href="{% url 'edit_task' task.id %}" class="btn btn-info btn-xs right" style="float: right;"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
             </li>
             {% endfor %}
 
@@ -71,11 +71,32 @@
 </div>
 </div>
 
+{% for task in tasks %}
+<div class="modal fade" id="modal-task" role="dialog">
+   <div class="modal-dialog">
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">{{ task.title }}</h4>
+       </div>
+       <div class="modal-body">
+         <p>{{ task.keterangan }}</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+
+  </div>
+</div>
+{% endfor %}
+
 <script src="{% static '/js/jquery-3.1.1.js' %}"></script>
 <script>
 $(document).ready(function() {
   $(document).on('click', '#confirm-delete', function(){
-    return confirm('Apakah anda yakin akan menghapus ini?');
+    return confirm('Apakah anda yakin akan mengedit ini?');
   });
 });
 </script>

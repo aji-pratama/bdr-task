@@ -84,7 +84,9 @@ def cek_done(request, pk):
     task.save()
     return HttpResponseRedirect('/doing-task')
 
-
+#Finish Today, Done
+@login_required(login_url='/login')
+@user_passes_test(lambda u:u.is_staf, login_url='/login')
 def finish_today(request):
     tasks = Task.objects.filter(done_status=False, doing_date=datetime.now().date())
     for task in tasks:
