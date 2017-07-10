@@ -57,7 +57,6 @@
               {% else %}
               <li class="list-group-item">
                 <a href="#"><strong>{{ task.title }}</strong></a>
-                <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
               </li>
               {% endif %}
             {% endfor %}
