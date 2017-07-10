@@ -34,7 +34,24 @@ def input_task(request):
 
         return HttpResponseRedirect('/input-task')
 
-    return render(request, 'staff/input_task.html', {'tasks': tasks})
+    return render(request, 'staff/input_task.html', {'tasks': tasks, 'time' : date.today()})
+
+# Page edit Task  before approvals
+@login_required(login_url='/login')
+@user_passes_test(lambda u:u.is_staf, login_url='/login')
+def edit_task(request, pk):
+    task_edit = Task.objects.get(id=pk)
+    tasks = Task.objects.filter(created_by=request.user, approval_status=False, created_date=datetime.now().date()).order_by('-id')
+    if request.POST:
+        task_edit.title = request.POST.get('title')
+        task_edit.keterangan = request.POST.get('keterangan')
+        task_edit.updated_date = date.today()
+        task_edit.save()
+        return HttpResponseRedirect('/input-task')
+
+    return render(request, 'staff/edit_task.html', {'tasks': tasks, 'time' : date.today(),
+                                                    'task_edit': task_edit})
+
 
 #Page delete Task for Staff just User as Staff can access
 @login_required(login_url='/login')

@@ -10,6 +10,7 @@ class Task(models.Model):
     done_status = models.BooleanField()
     keterangan = models.CharField(max_length=300, blank=True, null=True)
     created_date = models.DateField()
+    updated_date = models.DateField(null=True)
     created_by = models.ForeignKey(User)
     approval_by = models.ForeignKey(User, related_name='user_approval_by', null=True, blank=True)
     doing_date = models.DateField()

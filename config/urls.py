@@ -13,6 +13,7 @@ urlpatterns = [
 
     #Staff
     url(r'^input-task/$', task_views.input_task, name='input_task'),
+    url(r'^edit-task-(?P<pk>\d+)$', task_views.edit_task, name='edit_task'),
     url(r'^delete-task-(?P<pk>\d+)$', task_views.delete_task, name='delete_task'),
     url(r'^doing-task/$', task_views.doing_task, name='doing_task'),
     url(r'^cek-done-(?P<pk>\d+)$', task_views.cek_done, name='cek_done'),

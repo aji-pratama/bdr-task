@@ -23,16 +23,16 @@
           New Task
         </div>
 
-        <form class="" action="{% url 'input_task' %}" method="post">{% csrf_token %}
+        <form class="" action="{% url 'edit_task' task_edit.id %}" method="post">{% csrf_token %}
           <div class="panel-body">
             <div class="form-group">
               <label for="title">Title Task</label>
-              <input type="text" name="title" placeholder="Title Task" class="form-control">
+              <input type="text" name="title" placeholder="Title Task" class="form-control" value="{{ task_edit.title }}">
             </div>
 
             <div class="form-group">
               <label for="keterangan">Keterangan Task</label>
-              <textarea name="keterangan" placeholder="Keterangan Task" class="form-control"></textarea>
+              <textarea name="keterangan" placeholder="Keterangan Task" class="form-control"> {{ task_edit.keterangan }}</textarea>
             </div>
 
             <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md">
@@ -52,10 +52,14 @@
           <ul class="list-group">
             {% if tasks %}
             {% for task in tasks %}
-            <li class="list-group-item">
-              <a href="{% url 'edit_task' task.id %}"><strong>{{ task.title }}</strong></a>
-              <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
-            </li>
+              {% if task.id == task_edit.id %}
+
+              {% else %}
+              <li class="list-group-item">
+                <a href="#"><strong>{{ task.title }}</strong></a>
+                <a id="confirm-delete" href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-xs right" style="float: right;"> X </a>
+              </li>
+              {% endif %}
             {% endfor %}
 
             {% else %}
