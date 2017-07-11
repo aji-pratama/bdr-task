@@ -25,7 +25,7 @@
             {% if tasks %}
             {% for task in tasks %}
             <li class="list-group-item">
-              <a href="#" data-toggle="modal" data-target="#modalapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
+              <a href="#" data-toggle="modal" data-target="#modalunapvd{{ task.id }}"><strong>{{ task.title }}</strong></a>
               <a href="{% url 'approve' task.id %}" class="btn btn-success btn-xs" style="float: right;">approve</a>
             </li>
             {% endfor %}
@@ -70,7 +70,32 @@
     </div>
 
 
+<!-- Unapproved Task Lists -->
+    {% for task in tasks %}
+    <!-- Modal -->
+    <div class="modal fade" id="modalunapvd{{ task.id }}" role="dialog">
+      <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{{ task.title }}</h4>
+          </div>
+          <div class="modal-body">
+            <h4>{{ task.keterangan }}</h4>
+            <p>Doing Task : {{ task.doing_date }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+<!-- Approved Task Lists -->
     {% for task in task_approved %}
     <!-- Modal -->
     <div class="modal fade" id="modalapvd{{ task.id }}" role="dialog">
@@ -83,7 +108,8 @@
             <h4 class="modal-title">{{ task.title }}</h4>
           </div>
           <div class="modal-body">
-            <p>{{ task.keterangan }}</p>
+            <h4>{{ task.keterangan }}</h4>
+            <p>Doing Task : {{ task.doing_date }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
