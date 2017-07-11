@@ -84,14 +84,11 @@
 <script>
 $(document).ready(function() {
 
-  var dates = '{{task_edit.doing_date|date:"Y-m-d"}}';
-  var date = new Date();
-  var tomorrow = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-
+  var tomorrow = '{{ task_edit.doing_date|date:"Y-m-d" }}';
   $( "#id_doing_date" ).datepicker({
     dateFormat: "yy-mm-dd",
-    minDate: tomorrow,
-  });
+    minDate: new Date().getDate + 1,
+  }).datepicker('setDate', tomorrow);
 
   $(document).on('click', '#confirm-delete', function(){
     return confirm('Apakah anda yakin akan mengedit ini?');

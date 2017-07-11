@@ -22,9 +22,12 @@ def input_task(request):
         created_date = date.today()
         created_by = request.user
         approval_by = request.user.atasan
+        dates = request.POST.get('doing_date')
 
         #If today is Friday then doing date is Monday, else just tomorrow
-        if datetime.today().weekday() == 5:
+        if dates != None:
+            doing_date = dates
+        elif datetime.today().weekday() == 5:
             doing_date = date.today() + timedelta(days=3)
         else:
             doing_date = date.today() + timedelta(days=1)

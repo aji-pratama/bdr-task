@@ -87,7 +87,8 @@
          <h4 class="modal-title">{{ task.title }}</h4>
        </div>
        <div class="modal-body">
-         <p>{{ task.keterangan }}</p>
+         <h4>{{ task.keterangan }}</h4>
+         <p>Doing Task : {{ task.doing_date }}</p>
        </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,12 +105,18 @@
 $(document).ready(function() {
 
   var date = new Date();
-  var tomorrow = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+  if (date.getDate != 5){
+    var tomo = date.getDate() + 1;
+  } else {
+    var tomo = date.getDate() + 3;
+  }
+
+  var tomorrow = new Date(date.getFullYear(), date.getMonth(), tomo);
 
   $( "#id_doing_date" ).datepicker({
     dateFormat: "yy-mm-dd",
     minDate: tomorrow,
-  });
+  }).datepicker('setDate', tomorrow);
 
   $(document).on('click', '#confirm-delete', function(){
     return confirm('Apakah anda yakin akan mengedit ini?');
